@@ -24,7 +24,7 @@ angular.module('lineupApp')
     	};
     };
 
-    $scope.guestList = [
+    $scope.guests = [
     	Guest('Marc-Antoine', 'Babin', 4, '819-238-1313'),
 		Guest('Olivier', 'Charbonneau', 2, '819-238-1313'),
     	];

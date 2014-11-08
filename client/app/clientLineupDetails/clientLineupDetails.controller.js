@@ -2,5 +2,5 @@
 
 angular.module('lineupApp')
   .controller('ClientlineupdetailsCtrl', function ($scope) {
-    $scope.isInQueue = false;
+    $scope.isInQueue = true;
   });
