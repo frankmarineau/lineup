@@ -4,21 +4,21 @@
 
 'use strict';
 
-var thing = require('./thing.model');
+var Lineup = require('./lineup.model');
 
 exports.register = function(socket) {
-  thing.schema.post('save', function (doc) {
+  Lineup.schema.post('save', function (doc) {
     onSave(socket, doc);
   });
-  thing.schema.post('remove', function (doc) {
+  Lineup.schema.post('remove', function (doc) {
     onRemove(socket, doc);
   });
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('thing:save', doc);
+  socket.emit('lineup:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('thing:remove', doc);
+  socket.emit('lineup:remove', doc);
 }
