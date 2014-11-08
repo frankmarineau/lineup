@@ -31,10 +31,11 @@
     background-position: bottom;
 }
 .intro .container {
-  width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .intro .hero-content {
-  position: absolute;
+  position: relative;
   top: 40%;
 }
 .intro .hero-content .col-md-8 {
@@ -54,24 +55,21 @@
   cursor: pointer;
 }
 
-.what {
+.data-section {
   height: 600px;
   padding: 30px 15px;
   text-align: center;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
+
+.what {
+  color: #999;
+}
 .whom {
-  height: 70%;
-  padding: 30px 15px;
-  text-align: center;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   background-color: #EAEEF2;
 }
 .about {
-  height: 70%;
-  padding: 30px 15px;
-  text-align: center;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+
 }
 .footer {
     text-align: center;
