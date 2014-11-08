@@ -5,6 +5,7 @@ angular.module('lineupApp')
     $routeProvider
       .when('/lineups', {
         templateUrl: 'app/lineupList/lineupList.html',
-        controller: 'LineuplistCtrl'
+        controller: 'LineuplistCtrl',
+        authenticate: true
       });
   });
