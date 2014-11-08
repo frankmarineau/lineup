@@ -5,7 +5,10 @@ var mongoose = require('mongoose'),
 
 var LineupclientSchema = new Schema({
   lineup: { type: Schema.Types.ObjectId, ref: 'Lineup' },
-  client: { type: Schema.Types.ObjectId, ref: 'User' }
+  timeJoined: { type: Date, default: Date.now },
+  name: { type: String, required: true },
+  phone: String,
+  user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 module.exports = mongoose.model('Lineupclient', LineupclientSchema);

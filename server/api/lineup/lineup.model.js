@@ -4,8 +4,22 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var LineupSchema = new Schema({
-  name: String,
-  active: Boolean
+  title: String,
+  config: {
+    customFields: [{ type: Schema.Types.ObjectId, ref: 'Field' }],
+    maxPeopleInQueue: Number,
+    hours: {
+      open: {
+        hour: Number,
+        minute: Number
+      },
+      close: {
+        hour: Number,
+        minute: Number
+      }
+    },
+    active: Boolean
+  }
 });
 
 module.exports = mongoose.model('Lineup', LineupSchema);
