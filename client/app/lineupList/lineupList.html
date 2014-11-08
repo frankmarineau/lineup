@@ -3,22 +3,29 @@
 <div class="col-md-6 col-md-offset-3">
     <h1>Your Lineups</h1>
     <div class="list-group">
-      <a href="#" class="list-group-item lineup-element">
+      <a href="/lineups/{{lineup.id}}" class="list-group-item lineup-element" ng-repeat="lineup in lineups">
         <h3 class="list-group-item-heading">
-            Lineup Name
-            <small>30 people currently in line</small>
+            {{lineup.title}}
+            <small>
+                <span ng-switch="lineup.guests.length">
+                    <span ng-switch-when="0">No one</span>
+                    <span ng-switch-when="1">1 person</span>
+                    <span ng-switch-default>{{lineup.guests.length}} people</span>
+                </span>
+                currently in line
+            </small>
         </h3>
         <div class="row">
             <div class="col-md-4 stat-container">
-                <h2>5m</h2>
+                <h2>{{lineup.stats.averageWaitTime}}m</h2>
                 <p><small>avg wait time</small></p>
             </div>
             <div class="col-md-4 stat-container">
-                <h2>30</h2>
+                <h2>{{lineup.stats.averagePeopleInLine}}</h2>
                 <p><small>people in lineup per day</small></p>
             </div>
             <div class="col-md-4 stat-container">
-                <h2 class="text-danger">3</h2>
+                <h2 class="text-danger">{{lineup.stats.averageNoShows}}</h2>
                 <p><small>avg no-shows per day</small></p>
             </div>
         </div>
