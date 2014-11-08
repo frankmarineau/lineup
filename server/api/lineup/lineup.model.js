@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var LineupSchema = new Schema({
-  title: String,
+  title: { type: String, required: true },
+  enterprise: { type: Schema.Types.ObjectId, ref: 'Enterprise' },
   config: {
     customFields: [{ type: Schema.Types.ObjectId, ref: 'Field' }],
     maxPeopleInQueue: Number,
