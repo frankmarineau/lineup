@@ -24,4 +24,10 @@ angular.module('lineupApp')
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
+
+    $('#next').on('click', function() {
+        $('html, body').animate({
+            scrollTop: $('#what').offset().top
+        }, 1000);
+    });
   });
