@@ -57,6 +57,12 @@ var all = {
     clientID:     process.env.GOOGLE_ID || '1089881844763-o6vee3o077p9cgbkpjf3i767gkv039je.apps.googleusercontent.com',
     clientSecret: process.env.GOOGLE_SECRET || 'xQvMbA8lE4imTzNs6qmKFkM7',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/google/callback'
+  },
+
+  twilio: {
+    accountID: process.env.TWILIO_ID || 'ACb9ee0e8abe929f76087e39a029d851b8',
+    accountToken: process.env.TWILIO_TOKEN || '02bde46a670b22fe8bba6e4a8ee14947',
+    accountNumber: process.env.TWILIO_NUMBER || '+15145000443'
   }
 };
 
