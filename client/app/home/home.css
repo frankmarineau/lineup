@@ -7,7 +7,7 @@
 }
 
 #banner h1 {
-    font-size: 80px;
+    font-size: 8em;
     line-height: 1;
     letter-spacing: -1px;
 }
@@ -27,26 +27,46 @@
     text-align: center;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
     background-image: url("/assets/images/background-intro.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
+    background-position: bottom;
 }
 .intro .container {
-  width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .intro .hero-content {
-  position: absolute;
+  position: relative;
   top: 40%;
+}
+.intro .hero-content .col-md-8 {
+  padding: -15;
 }
 .intro .logo {
   padding-top: 20px;
 }
-.what {
+.intro .subtitle {
+  font-size: 3.5em;
+  padding-left: 30px;
+}
+.intro .next {
+  position: absolute;
+  top: 88%;
+  left: 50%;
+  cursor: pointer;
+}
 
+.data-section {
+  height: 600px;
+  padding: 30px 15px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.what {
+  color: #999;
 }
 .whom {
-
+  background-color: #EAEEF2;
 }
 .about {
 
@@ -56,4 +76,5 @@
     padding: 30px 0;
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
+    background-color: #EAEEF2;
 }

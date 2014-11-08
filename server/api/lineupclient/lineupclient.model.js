@@ -7,7 +7,7 @@ var LineupclientSchema = new Schema({
   lineup: { type: Schema.Types.ObjectId, ref: 'Lineup' },
   timeJoined: { type: Date, default: Date.now },
   timeLeave: Date,
-  name: { type: String, required: true },
+  name: String,
   phone: String,
   user: { type: Schema.Types.ObjectId, ref: 'User' }
 });

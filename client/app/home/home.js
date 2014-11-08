@@ -8,3 +8,9 @@ angular.module('lineupApp')
         controller: 'HomeCtrl'
       });
   });
+
+$('#next').on('click', function() {
+    $('html, body').animate({
+        scrollTop: $('#what').offset().top
+    }, 1000);
+});
