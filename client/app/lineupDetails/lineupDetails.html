@@ -7,8 +7,9 @@
       <div class="panel-heading">
         <h3 class="panel-title">Analytics</h3>
       </div>
-      <div class="panel-body">
-        <div class="btn-group">
+      <div class="panel-body" id="analytics-section">
+        <h4 id="analytics-timerange">November 3 - 9</h4>
+        <div class="btn-group" id="analytics-timescale">
           <button type="button" class="btn btn-default">Day</button>
           <button type="button" class="btn btn-default">Week</button>
           <button type="button" class="btn btn-default">Month</button>
@@ -17,7 +18,7 @@
         <div class="row">
           <div class="col-md-12">
             <h4># of users who <span style="color: #0f9ff1;">were served</span> - <span style="color: #e67e22;">never showed up</span></h4>
-            <canvas chart="Line" options="chartOptions" data="achalandageChart" width="1050" height="400"></canvas>
+            <canvas chart="Line" options="chartOptions" data="achalandageChart" width="1080" height="400"></canvas>
           </div>
         </div>
       </div>
@@ -28,26 +29,34 @@
         <h3 class="panel-title">Settings</h3>
       </div>
       <div class="panel-body">
-        <form role="form">
-          <div class="form-group">
-            <label for="title">Line up title</label>
-            <input type="text" class="form-control" id="title">
+        <form role="form" ng-submit="updateSettings()">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" ng-model="title">
+              </div>
+            </div>
+            <div class="column-md-6">
+              <div class="form-group">
+                <label for="openingHour">Max number of people in queue</label>
+                <input type="text" class="form-control" id="maxInQueue" ng-model="maxInQueue">
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="openingHour">Opening hour</label>
+                <timepicker ng-model="openingHour" ng-change="openingHourChanged()" hour-step="1" minute-step="5" show-meridian="1"></timepicker>
+              </div>
+            </div>
+            <div class="column-md-6">
+              <label for="openingHour">Closing hour</label>
+              <timepicker ng-model="closingHour" ng-change="closingHourChanged()" hour-step="1" minute-step="5" show-meridian="1"></timepicker>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="exampleInputFile">File input</label>
-            <input type="file" id="exampleInputFile">
-            <p class="help-block">Example block-level help text here.</p>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox"> Check me out
-            </label>
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="submit" class="btn btn-default">Save</button>
         </form>
       </div>
     </div>
