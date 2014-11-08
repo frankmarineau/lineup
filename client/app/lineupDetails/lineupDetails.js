@@ -3,7 +3,7 @@
 angular.module('lineupApp')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/lineupDetails', {
+      .when('/lineups/:id', {
         templateUrl: 'app/lineupDetails/lineupDetails.html',
         controller: 'LineupdetailsCtrl'
       });
