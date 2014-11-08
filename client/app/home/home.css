@@ -47,6 +47,12 @@
   font-size: 3.5em;
   padding-left: 30px;
 }
+.intro .next {
+  position: absolute;
+  top: 88%;
+  left: 50%;
+  cursor: pointer;
+}
 
 .what {
 
