@@ -2,5 +2,5 @@
 
 angular.module('lineupApp')
   .controller('ClientlineupdetailsCtrl', function ($scope) {
-    $scope.message = 'Hello';
+    $scope.isInQueue = false;
   });

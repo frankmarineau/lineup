@@ -1,3 +1,15 @@
-<div class="col-md-12">
-This is the clientLineupDetails view.
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="col-md-12 client-queue-details">
+    <h1>Hi <b>Jesse</b>!</h1>
+
+    <div ng-show="isInQueue">
+        HELLO WORLD
+    </div>
+
+    <div ng-hide="isInQueue" class="noqueue-container">
+        <h2>You are not currently in a lineup.</h2>
+        <h4>Remember, life is too short. Don't wait for your turn to live it.</h4>
+        <p><em>- Team BeInLine</em></p>
+    </div>
 </div>
