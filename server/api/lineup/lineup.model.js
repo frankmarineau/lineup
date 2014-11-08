@@ -23,4 +23,8 @@ var LineupSchema = new Schema({
   }
 });
 
+LineupSchema.methods.findUsers = function (cb) {
+  this.model('Lineupuser').find({ lineup: this._id }).populate('user').exec(cb);
+};
+
 module.exports = mongoose.model('Lineup', LineupSchema);

@@ -6,7 +6,7 @@
 'use strict';
 
 var Lineup = require('../api/lineup/lineup.model');
-var Lineupclient = require('../api/lineupclient/lineupclient.model');
+var Lineupuser = require('../api/lineupuser/lineupuser.model');
 var User = require('../api/user/user.model');
 
 User.find({}).remove(function () {
@@ -59,8 +59,8 @@ User.find({}).remove(function () {
         }, function (err, user) {
           console.log('finished populating users');
 
-          Lineupclient.find({}).remove(function () {
-            Lineupclient.create({
+          Lineupuser.find({}).remove(function () {
+            Lineupuser.create({
               lineup: lineup._id,
               name: 'Franky Marinade',
               phone: '1234567890'
@@ -72,7 +72,7 @@ User.find({}).remove(function () {
               lineup: lineup._id,
               user: user._id
             }, function () {
-              console.log('finished populating lineupclients');
+              console.log('finished populating lineupusers');
             });
           });
         });
