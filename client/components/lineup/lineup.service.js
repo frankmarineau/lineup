@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lineupApp')
-  .service('lineup', function ($resource) {
+  .service('Lineup', function ($resource) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     // return $resource('/user/:userId/card/:cardId',
     //  {userId:123, cardId:'@id'}, {
@@ -10,14 +10,20 @@ angular.module('lineupApp')
 
     return {
       query: function() {
+        var d = new Date();
+        d.setMinutes(d.getMinutes() - 10);
+
+        var d2 = new Date();
+        d2.setMinutes(d2.getMinutes() - 20);
+
         var lineups = [{
           title: 'allo',
           guests: [{
-            timeJoined: moment().subtract(10, 'minutes'),
+            timeJoined: d,
             name: "Franky Marinade",
             phone: "123 456-7890"
           }, {
-            timeJoined: moment().subtract(20, 'minutes'),
+            timeJoined: d2,
             name: "Jesse Emondeur",
             phone: "450 466-1337"
           }],
@@ -39,7 +45,9 @@ angular.module('lineupApp')
             // In minutes
             averageWaitTime: 35
           }
-        }]
+        }];
+
+        return lineups;
       }
     }
   });

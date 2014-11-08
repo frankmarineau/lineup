@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Service: lineup', function () {
+describe('Service: Lineup', function () {
 
   // load the service's module
   beforeEach(module('lineupApp'));
