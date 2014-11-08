@@ -21,11 +21,11 @@ angular.module('lineupApp')
           guests: [{
             timeJoined: d,
             name: "Franky Marinade",
-            phone: "123 456-7890"
+            phone: "1234567890"
           }, {
             timeJoined: d2,
             name: "Jesse Emondeur",
-            phone: "450 466-1337"
+            phone: "4504661337"
           }],
           config: {
             customFields: ["Number of reservations"],

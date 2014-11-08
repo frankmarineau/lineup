@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('lineupApp')
-  .controller('LineupdetailsCtrl', function ($scope) {
-    $scope.message = 'Hello';
+  .controller('LineupdetailsCtrl', function ($scope, Lineup, $routeParams) {
+    Lineup.query($routeParams.id);
   });
