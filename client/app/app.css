@@ -39,5 +39,8 @@
 }
 
 body {
-  padding-top: 65px;
+  padding-top: 45px;
+}
+.full-height {
+  height: 100%;
 }
