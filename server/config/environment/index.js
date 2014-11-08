@@ -26,11 +26,11 @@ var all = {
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: 'lineup-secret'
+    session: '-o)VkeaEk*]mQCJ^5Jtq-4L<ZbMu/I[|JmMW/5|%~EX7VU2uA=w*vHX:]@A{n:>'
   },
 
   // List of user roles
-  userRoles: ['guest', 'user', 'admin'],
+  userRoles: ['guest', 'user', 'clerk', 'admin'],
 
   // MongoDB connection options
   mongo: {
@@ -48,14 +48,14 @@ var all = {
   },
 
   twitter: {
-    clientID:     process.env.TWITTER_ID || 'id',
-    clientSecret: process.env.TWITTER_SECRET || 'secret',
+    clientID:     process.env.TWITTER_ID || 'Si0YGJTqwWlweira3LOq37jGr',
+    clientSecret: process.env.TWITTER_SECRET || '7pAgHwbrkrlxCws6ACu0KT8oN9q3XITMOGLLIz3PTRAWBHbaMn',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/twitter/callback'
   },
 
   google: {
-    clientID:     process.env.GOOGLE_ID || 'id',
-    clientSecret: process.env.GOOGLE_SECRET || 'secret',
+    clientID:     process.env.GOOGLE_ID || '1089881844763-o6vee3o077p9cgbkpjf3i767gkv039je.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_SECRET || 'xQvMbA8lE4imTzNs6qmKFkM7',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/google/callback'
   }
 };
