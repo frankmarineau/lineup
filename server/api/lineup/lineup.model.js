@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 var LineupSchema = new Schema({
   title: { type: String, required: true },
-  enterprise: { type: Schema.Types.ObjectId, ref: 'Enterprise' },
+  owner: { type: Schema.Types.ObjectId, ref: 'User' },
   config: {
     customFields: [{ type: Schema.Types.ObjectId, ref: 'Field' }],
     maxPeopleInQueue: Number,
