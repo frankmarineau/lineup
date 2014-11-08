@@ -4,24 +4,65 @@
 
 #banner {
     border-bottom: none;
-    margin-top: -20px;
 }
 
 #banner h1 {
-    font-size: 60px;
+    font-size: 8em;
     line-height: 1;
     letter-spacing: -1px;
 }
+.fa-8x {
+  font-size: 8em;
+}
+.fa-angle-double-down {
+  padding-top:30px;
+  display: block;
+  color: white;
+}
 
-.hero-unit {
-    position: relative;
+.intro {
+    height: 100%;
     padding: 30px 15px;
     color: #F5F5F5;
     text-align: center;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #4393B9;
+    background-image: url("/assets/images/background-intro.jpg");
+    background-size: cover;
+    background-position: bottom;
+}
+.intro .container {
+  width: 400px;
+}
+.intro .hero-content {
+  position: absolute;
+  top: 40%;
+}
+.intro .hero-content .col-md-8 {
+  padding: -15;
+}
+.intro .logo {
+  padding-top: 20px;
+}
+.intro .subtitle {
+  font-size: 3.5em;
+  padding-left: 30px;
+}
+.intro .next {
+  position: absolute;
+  top: 88%;
+  left: 50%;
+  cursor: pointer;
 }
 
+.what {
+
+}
+.whom {
+
+}
+.about {
+
+}
 .footer {
     text-align: center;
     padding: 30px 0;

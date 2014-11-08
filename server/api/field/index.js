@@ -1,12 +1,11 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./lineup.controller');
-var auth = require('../../auth/auth.service');
+var controller = require('./field.controller');
 
 var router = express.Router();
 
-router.get('/', auth.isAuthenticated(), controller.index);
+router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.update);

@@ -2,6 +2,14 @@
 
 angular.module('lineupApp')
   .controller('LineuplistCtrl', function ($scope, Lineup) {
-    $scope.lineups = Lineup.query();
-    console.log($scope.lineups);
+    var refreshLineups = function() {
+        $scope.lineups = Lineup.query();
+    };
+    refreshLineups();
+    setInterval(refreshLineups, 1000);
+
+
+    if ($scope.lineups.length == 1) {
+        //TODO redirect on it
+    }
   });
