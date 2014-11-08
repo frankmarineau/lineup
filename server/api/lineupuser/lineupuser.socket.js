@@ -4,21 +4,21 @@
 
 'use strict';
 
-var Enterprise = require('./enterprise.model');
+var Lineupuser = require('./lineupuser.model');
 
 exports.register = function(socket) {
-  Enterprise.schema.post('save', function (doc) {
+  Lineupuser.schema.post('save', function (doc) {
     onSave(socket, doc);
   });
-  Enterprise.schema.post('remove', function (doc) {
+  Lineupuser.schema.post('remove', function (doc) {
     onRemove(socket, doc);
   });
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('enterprise:save', doc);
+  socket.emit('lineupuser:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('enterprise:remove', doc);
+  socket.emit('lineupuser:remove', doc);
 }

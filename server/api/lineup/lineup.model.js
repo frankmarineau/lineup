@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 var LineupSchema = new Schema({
   title: { type: String, required: true },
-  enterprise: { type: Schema.Types.ObjectId, ref: 'Enterprise' },
+  owner: { type: Schema.Types.ObjectId, ref: 'User' },
   config: {
     customFields: [{ type: Schema.Types.ObjectId, ref: 'Field' }],
     maxPeopleInQueue: Number,
@@ -22,5 +22,9 @@ var LineupSchema = new Schema({
     active: Boolean
   }
 });
+
+LineupSchema.methods.findUsers = function (cb) {
+  this.model('Lineupuser').find({ lineup: this._id }).populate('user').exec(cb);
+};
 
 module.exports = mongoose.model('Lineup', LineupSchema);
