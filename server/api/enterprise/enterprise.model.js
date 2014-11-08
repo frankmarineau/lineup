@@ -5,8 +5,8 @@ var mongoose = require('mongoose'),
 
 var EnterpriseSchema = new Schema({
   name: String,
-  info: String,
-  active: Boolean
+  owner: { type: Schema.Types.ObjectId, ref: 'User' },
+  lineups: [{ type: Schema.Types.ObjectId, ref: 'Lineup' }]
 });
 
 module.exports = mongoose.model('Enterprise', EnterpriseSchema);
