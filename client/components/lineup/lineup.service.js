@@ -48,6 +48,38 @@ angular.module('lineupApp')
         }];
 
         return lineups;
+      },
+      get: function(id) {
+        return {
+          title: 'allo',
+          guests: [{
+            timeJoined: d,
+            name: "Franky Marinade",
+            phone: "1234567890"
+          }, {
+            timeJoined: d2,
+            name: "Jesse Emondeur",
+            phone: "4504661337"
+          }],
+          config: {
+            customFields: ["Number of reservations"],
+            maxPeopleInQueue: 15,
+            hours: {
+              open: {
+                hour: 7,
+                minute: 0
+              },
+              close: {
+                hour: 22,
+                minute: 0
+              }
+            }
+          },
+          stats: {
+            // In minutes
+            averageWaitTime: 35
+          }
+        };
       }
     }
   });
