@@ -12,11 +12,11 @@ angular.module('lineupApp')
 
     $scope.lineupName = $scope.GetLineupName();
 
-    var Guest = function( firstName, lastName, numberOfAttendees, phoneNumer){
+    var Guest = function( firstName, lastName, groupSize, phoneNumer){
     	return {
     		firstName: firstName,
     		lastName: lastName,
-    		numberOfAttendees: numberOfAttendees,
+    		groupSize: groupSize,
     		phoneNumer: phoneNumer,
     		fullName : function(){
     			return firstName + ' ' + lastName;

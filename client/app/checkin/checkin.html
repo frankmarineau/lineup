@@ -6,13 +6,23 @@
   <div class="list-group">
   	<div class = "list-group-item lineup-element" ng-repeat="guest in guests">
   		<div class="row" >
+			<div class="col-md-4 stat-container">
+				<h3 class = "list-group-item-heading">
+					<span class="glyphicon glyphicon-user"> </span>{{guest.fullName()}}
+				</h3>
+			</div>
+			<div class="col-md-4 container">
+				Number of seats reserved: <h4>{{guest.groupSize}}</h4>
+			</div>
+			<div class="col-md-4 stat-container">
+				<button> <span class = "glyphicon glyphicon-ok"></span>
+				</button>
+				<button> <span class = "glyphicon glyphicon-remove"></span>
+				</button>
+			</div>
 			
-			<h3 class = "list-group-item-heading">
-				<span class="glyphicon glyphicon-user"> </span>{{guest.fullName()}}
-			</h3>
 		</div>
   	</div>
-	
   </div>
   
 </div>
