@@ -35,8 +35,15 @@
     margin-right: auto;
 }
 .intro .hero-content {
-  position: relative;
+  width:100%;
+  position: absolute;
   top: 40%;
+  right: 0;
+  left: 0;
+}
+.intro .hero-inside {
+  margin: auto;
+  width: 630px;
 }
 .intro .hero-content .col-md-8 {
   padding: -15;
@@ -60,12 +67,15 @@
   padding: 30px 15px;
   text-align: center;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  color: #21384d;
+}
+.data-section h1 {
+  font-size: 4em;
 }
 
 .what {
-  color: #999;
 }
-.whom {
+.mission {
   background-color: #EAEEF2;
 }
 .about {
