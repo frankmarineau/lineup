@@ -141,6 +141,18 @@ UserSchema.methods = {
     if (!password || !this.salt) return '';
     var salt = new Buffer(this.salt, 'base64');
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+  },
+
+  findLineups: function (cb) {
+    this.model('Lineupclient').find({ user: this._id }).populate('lineup').exec(function (err, linenupclients) {
+      if (err) return cb(err);
+
+      var lineups = [];
+      linenupclients.forEach(function (lineupclient) {
+        lineups.push(lineupclient.lineup);
+      });
+      cb(err, lineups);
+    });
   }
 };
 

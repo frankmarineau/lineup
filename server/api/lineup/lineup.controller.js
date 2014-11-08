@@ -5,7 +5,7 @@ var Lineup = require('./lineup.model');
 
 // Get list of lineups
 exports.index = function(req, res) {
-  Lineup.find(function (err, lineups) {
+  req.user.findLineups(function (err, lineups) {
     if(err) { return handleError(res, err); }
     return res.json(200, lineups);
   });
