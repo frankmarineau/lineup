@@ -1,17 +1,56 @@
 .client-queue-details {
     text-align: center;
     height: 100%;
-
-    background-image: url('/assets/images/background-intro.jpg');
-    background-size: cover;
-    color: white;
-
-    padding-top: 35%;
+    width: 100%;
+    padding: 0;
 }
 
 .client-queue-details h1 {
     margin-top: 0;
-    margin-bottom: 25%;
+}
+
+.inqueue-container {
+    margin-top: 15%;
+}
+.inqueue-container h2 {
+    margin-top: 10%;
+}
+.inqueue-container h4 {
+    margin-top: 3%;
+}
+
+.position-in-line {
+}
+.expected-wait-time {
+    color: ;
+}
+
+.client-queue-details-stats {
+    margin-top: 10%;
+}
+.client-queue-details-stats h1 {
+    margin-top: 10%;
+}
+.client-queue-details-stats h2 {
+    margin-top: 0;
+    font-weight: bold;
+    font-size: 5em;
+}
+
+.noqueue-container {
+    background-image: url('/assets/images/background-intro.jpg');
+    background-size: cover;
+    color: white;
+
+    height: 100%;
+}
+
+.noqueue-container h1 {
+    padding-top: 30%;
+    margin-bottom: 30%;
+}
+.noqueue-container h1, .noqueue-container h2 {
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.9);
 }
 
 .noqueue-container h2 {

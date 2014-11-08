@@ -5,6 +5,7 @@ angular.module('lineupApp')
     $routeProvider
       .when('/checkin', {
         templateUrl: 'app/checkin/checkin.html',
-        controller: 'CheckinCtrl'
+        controller: 'CheckinCtrl',
+        authenticate: true
       });
   });

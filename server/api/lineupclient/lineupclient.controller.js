@@ -2,6 +2,8 @@
 
 var _ = require('lodash');
 var Lineupclient = require('./lineupclient.model');
+var User = require('../user/user.model.js');
+var twilio = require('../../twilio/twilio.service');
 
 // Get list of lineupclients
 exports.index = function(req, res) {
@@ -24,6 +26,9 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Lineupclient.create(req.body, function(err, lineupclient) {
     if(err) { return handleError(res, err); }
+    if (lineupclient.phone) {
+      // twilio.sendMessage(lineupclient.phone, 'Welcome ' + lineupclient.name + ' to the line.');
+    }
     return res.json(201, lineupclient);
   });
 };

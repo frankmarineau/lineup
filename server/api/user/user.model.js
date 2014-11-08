@@ -144,15 +144,7 @@ UserSchema.methods = {
   },
 
   findLineups: function (cb) {
-    this.model('Lineupclient').find({ user: this._id }).populate('lineup').exec(function (err, linenupclients) {
-      if (err) return cb(err);
-
-      var lineups = [];
-      linenupclients.forEach(function (lineupclient) {
-        lineups.push(lineupclient.lineup);
-      });
-      cb(err, lineups);
-    });
+    this.model('Lineupclient').find({ user: this._id }).populate('lineup').exec(cb);
   }
 };
 
