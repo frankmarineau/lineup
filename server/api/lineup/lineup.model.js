@@ -14,7 +14,7 @@ var LineupSchema = new Schema({
   },
   closing: {
     hour: Number,
-    minute: Number,
+    minute: Number
   },
   active: { type: Boolean, default: true }
 });

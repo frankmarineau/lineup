@@ -15,7 +15,7 @@ exports.index = function (req, res) {
         lineup.lineupStats(function (err, stats) {
           lineup = lineup.toObject();
           lineup.count = stats.count;
-          lineup.wait = Math.round(stats.count * stats.wait / 1000 / 60);
+          lineup.wait = Math.round(stats.wait / 1000 / 60);
           callback(err, lineup);
         });
       }, function (err, lineups) {
@@ -30,7 +30,7 @@ exports.index = function (req, res) {
         lineup.lineupStats(function (err, stats) {
           lineup = lineup.toObject();
           lineup.count = stats.count;
-          lineup.wait = Math.round(stats.count * stats.wait / 1000 / 60);
+          lineup.wait = Math.round(stats.wait / 1000 / 60);
           callback(err, lineup);
         });
       }, function (err, lineups) {
