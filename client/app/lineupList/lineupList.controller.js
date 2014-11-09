@@ -18,10 +18,14 @@ angular.module('lineupApp')
     });
 
     $scope.addLineup = function() {
+        if ($scope.title.trim().length === 0)
+            return;
+
         Lineup.save({
             title: $scope.title
         }, function(newLineup) {
             $scope.lineups.push(newLineup);
+            $scope.title = "";
         });
     };
   });
