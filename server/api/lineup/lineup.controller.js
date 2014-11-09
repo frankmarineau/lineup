@@ -11,9 +11,12 @@ exports.index = function (req, res) {
       return res.json(200, lineups);
     });
   } else if (req.user.hasRole('clerk')) {
-    return res.json(501, 'Not Implemented');
+    Lineup.find({ owner: req.user.manager }, function (err, lineups) {
+      if (err) return handleError(res, err);
+      return res.json(200, lineups);
+    });
   } else {
-    return res.json(501, 'Not Implemented');
+    return res.send(501, 'Not Implemented');
   }
 };
 
@@ -21,7 +24,7 @@ exports.show = function (req, res) {
   if (req.user.hasRole('clerk')) {
     Lineup.findById(req.params.id, function (err, lineup) {
       if (err) return handleError(res, err);
-      if (!lineup) return res.json(404);
+      if (!lineup) return res.send(404);
       Lineupuser.find({ lineup: lineup._id }).populate('user').exec(function (err, lineupusers) {
         if (err) return handleError(res, err);
         lineup.clients = lineupusers;
@@ -31,7 +34,7 @@ exports.show = function (req, res) {
   } else {
     Lineup.findById(req.params.id, function (err, lineup) {
       if (err) return handleError(res, err);
-      if (!lineup) return res.json(404);
+      if (!lineup) return res.send(404);
       return res.json(200, lineup);
     });
   }
@@ -42,32 +45,50 @@ exports.create = function (req, res) {
     req.body.owner = req.user._id;
     Lineup.create(req.body, function (err, lineup) {
       if (err) return handleError(res, err);
-      return res.json(200, lineup);
+      return res.json(201, lineup);
     });
   } else if (req.user.hasRole('clerk')) {
-    return res.json(501, 'Not Implemented');
+    return res.send(501, 'Not Implemented');
   } else {
-    return res.json(501, 'Not Implemented');
+    return res.send(501, 'Not Implemented');
   }
 };
 
 exports.update = function (req, res) {
+  if (req.body._id) { delete req.body._id; }
+  if (req.body.owner) { delete req.body.owner; }
+
   if (req.user.hasRole('admin')) {
-    return res.json(501, 'Not Implemented');
+    Lineup.findById(req.params.id, function (err, lineup) {
+      if (err) return handleError(res, err);
+      if (!lineup) return res.send(404);
+      var updated = _.merge(lineup, req.body);
+      updated.save(function (err) {
+        if (err) return handleError(res, err);
+        return res.json(200, updated);
+      });
+    });
   } else if (req.user.hasRole('clerk')) {
-    return res.json(501, 'Not Implemented');
+    return res.send(501, 'Not Implemented');
   } else {
-    return res.json(501, 'Not Implemented');
+    return res.send(501, 'Not Implemented');
   }
 };
 
 exports.destroy = function (req, res) {
   if (req.user.hasRole('admin')) {
-    return res.json(501, 'Not Implemented');
+    Lineup.findById(req.params.id, function (err, lineup) {
+      if (err) return handleError(res, err);
+      if (!lineup) return res.send(404);
+      lineup.remove(function (err) {
+        if (err) return handleError(res, err);
+        return res.send(204);
+      });
+    });
   } else if (req.user.hasRole('clerk')) {
-    return res.json(501, 'Not Implemented');
+    return res.send(501, 'Not Implemented');
   } else {
-    return res.json(501, 'Not Implemented');
+    return res.send(501, 'Not Implemented');
   }
 };
 
