@@ -7,7 +7,7 @@
 }
 
 #banner h1 {
-    font-size: 8em;
+    font-size: 4em;
     line-height: 1;
     letter-spacing: -1px;
 }
@@ -43,17 +43,15 @@
 }
 .intro .hero-inside {
   margin: auto;
-  width: 630px;
+  width: 70%;
 }
 .intro .hero-content .col-md-8 {
   padding: -15;
 }
-.intro .logo {
-  padding-top: 20px;
-}
 .intro .subtitle {
   font-size: 2em;
   padding-left: 30px;
+  opacity: 0.7;
 }
 .intro .next {
   position: absolute;
@@ -86,13 +84,16 @@
   background-color: #EAEEF2;
   height: 425px;
 }
-.mission p {
-  font-size: 2em;
-  padding-top: 20px;
+.mission .container {
+  margin-top:40px;
+  width: 35%;
 }
-.mission h1 {
-  padding-bottom: 50px;
+.mission h2 {
+  line-height: 1.5em;
+  margin-bottom: 50px;
 }
+
+
 .footer {
     text-align: center;
     padding: 30px 0;
@@ -102,8 +103,28 @@
 .footer .container {
   padding-top: 10px;
 }
+.btn-signup {
+  background-color: #8CE200;
+  border-color: #8CE200;
+}
 
+@media only screen and (max-device-width: 1750px) {
+  .mission .container {
+    width: 45%;
+  }
+}
+@media only screen and (max-device-width: 1355px) {
+  .mission .container {
+    width: 55%;
+  }
+}
 @media only screen and (max-device-width: 992px) {
+  .mission .container {
+    width: 90%;
+  }
+  .mission h2 {
+    font-size:1.5em;
+  }
   .intro .hero-inside {
     margin: auto;
     width: 100%;
@@ -116,7 +137,7 @@
     font-size: 4em;
   }
   #banner h1 {
-    font-size: 4em;
+    font-size: 2.5em;
     line-height: 1;
     letter-spacing: -1px;
   }
