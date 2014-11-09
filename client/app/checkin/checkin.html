@@ -28,23 +28,19 @@
     </div>
   </form>
   <h2>Guest List</h2>
-  <div class="list-group">
+  <div class="list-group checkin-list">
   	<div class = "list-group-item" ng-repeat="guest in checkin.guests">
   		<div class="row" >
-			<div class="col-md-4 ">
+			<div class="col-md-8 name">
 				<h3 class = "list-group-item-heading">
-					<span class="glyphicon glyphicon-user"> </span>{{guest.name}}
+          {{checkin.fullName(guest)}}
 				</h3>
-				<span></span>
 			</div>
-			<div class="col-md-4 ">
-				<h3><small>Phone number: </small>{{guest.phoneNumber}}</h3>
-			</div>
-			<div class="col-md-4 ">
-				<button ng-click="checkout($index)"> <span class = "glyphicon glyphicon-ok"></span>
-				</button>
-				<button ng-click="deleteGuest($index)"> <span class = "glyphicon glyphicon-remove"></span>
-				</button>
+			<div class="col-md-4 buttons">
+        <div class="btn-group pull-right ">
+  				<button ng-click="DeleteGuest($index)" class="btn btn-danger btn-lg">&#10006;</button>
+  				<button ng-click="Checkout($index)" class="btn btn-success btn-lg"><i class="fa fa-check"></i></button>
+        </div>
 			</div>
 		</div>
   	</div>

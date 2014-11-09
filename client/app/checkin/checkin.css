@@ -5,3 +5,24 @@
 h2 {
   padding-top:20px;
 }
+.checkin-list .name{
+  padding-top: 30px;
+}
+.checkin-list .btn-lg {
+  padding: 15px 30px;
+  font-size: 25px;
+  line-height: 1.2;
+  border-radius: 6px;
+}
+.checkin-list .nb-seats h3 {
+  margin-top: 18px;
+}
+.checkin-list .btn-group {
+  padding: 15px 15px 15px;
+}
+.checkin-list h3 {
+  font-size: 2.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
