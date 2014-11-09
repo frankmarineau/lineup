@@ -30,6 +30,38 @@
       </div>
     </div>
 
+    <div class="panel panel-default analytics-container user-data-container" style="position: relative;">
+      <h3>User data</h3>
+      <button type="button" class="btn btn-success" style="position: absolute; top: 50px; right: 40px;">Export CSV</button>
+      <hr>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone number</th>
+              <th>Sex</th>
+              <th>Age</th>
+              <th>Email</th>
+              <th>Wait time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="user in lineup.users">
+              <td>{{ user.name }}</td>
+              <td>{{ user.phone || '-' }}</td>
+              <td>{{ user.user.facebook.gender || '-' }}</td>
+              <td>{{ user.user.facebook.age || '-' }}</td>
+              <td>{{ user.user.email || '-' }}</td>
+              <td>{{ getTimeInterval(user.timeJoined, user.timeLeft) }} mins</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+    </div>
+
     <div class="panel panel-default analytics-container settings-container">
       <h3>Settings</h3>
       <hr>

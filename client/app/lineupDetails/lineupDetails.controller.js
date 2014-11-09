@@ -36,6 +36,10 @@ angular.module('lineupApp')
       ]
     };
 
+    $scope.getTimeInterval = function(timeJoined, timeLeft) {
+      return Math.floor((new Date(timeLeft).getTime() - new Date(timeJoined).getTime()) / 60 / 1000);
+    };
+
     $scope.chartOptions = {
       scaleStartValue: 0,
       animationSteps : 30

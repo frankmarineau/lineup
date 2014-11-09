@@ -8,7 +8,6 @@ var router = express.Router();
 
 router.post('/', function (req, res, next) {
   User.findOne({ phone: req.body.from }, function (err, user) {
-
   });
 });
 
