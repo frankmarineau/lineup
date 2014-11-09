@@ -5,6 +5,8 @@ angular.module('lineupApp')
     $scope.lineup = Lineup.get({id: $routeParams.id});
 
     $scope.addGuest = function() {
+        if ($scope.user.name.trim().length === 0) return;
+
         Lineup.create({
             id: $scope.lineup._id
         }, {
