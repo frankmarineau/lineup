@@ -22,11 +22,31 @@
     font-weight: bold;
 }
 
-#analytics-timescale .btn:hover, #analytics-timescale .btn.active, #analytics-timescale .btn:focus {
+#analytics-timescale .btn:hover, #analytics-timescale .btn.active, #analytics-timescale .btn:focus, #save-button {
     background-color: #85D600;
     color: white;
 }
 
+#save-button {
+    margin-top: 20px;
+}
+
+.settings-container label {
+    font-weight: normal;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
 #analytics-timescale .btn {
     box-shadow: none;
+}
+
+.settings-container .timepicker { /* space between timepicker boxes */
+    border-collapse: separate;
+    border-spacing: 10px 5px;
+    margin-left: -10px;
+}
+
+.settings-container .timepicker tr.text-center { /* hide timepicker arrows */
+    display: none;
 }
