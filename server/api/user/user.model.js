@@ -10,7 +10,7 @@ var UserSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, lowercase: true },
   phone: String,
-  role: { type: String, default: 'guest' },
+  role: { type: String, default: 'user' },
   manager: { type: Schema.Types.ObjectId, ref: 'User' },
   hashedPassword: String,
   provider: String,
