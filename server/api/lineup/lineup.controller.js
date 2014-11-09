@@ -185,6 +185,7 @@ function handleError(res, err) {
 }
 
 function numberString(n) {
+  if (isNaN(n)) return '?';
   var m = n % 10;
   var s = 'th';
   if (m === 1) s = 'st';

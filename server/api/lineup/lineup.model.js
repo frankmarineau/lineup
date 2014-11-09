@@ -41,7 +41,7 @@ LineupSchema.methods.averageWait = function (cb) {
 LineupSchema.methods.lineupStats = function (cb) {
   var self = this;
   var stats = { count: 0, noshow: 0, wait: 0 }
-  this.userCount(function (err, count) {
+  self.userCount(function (err, count) {
     if (err) return cb(err, stats);
     stats.count = count;
     self.noshowCount(function (err, noshow) {

@@ -35,7 +35,7 @@ LineupuserSchema.methods.averageWait = function (cb) {
 
 LineupuserSchema.methods.estimatedWait = function (cb) {
   var self = this;
-  this.averageWait(function (err, wait) {
+  self.averageWait(function (err, wait) {
     if (err) return cb(err, 0);
     self.userPosition(function (err, pos) {
       if (err) return cb(err, 0);
@@ -47,7 +47,7 @@ LineupuserSchema.methods.estimatedWait = function (cb) {
 LineupuserSchema.methods.userStats = function (cb) {
   var self = this;
   var stats = { count: 0, pos: 0, wait: 0 };
-  this.userCount(function (err, count) {
+  self.userCount(function (err, count) {
     if (err) return cb(err, stats);
     stats.count = count;
     self.userPosition(function (err, pos) {
