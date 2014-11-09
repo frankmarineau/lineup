@@ -78,7 +78,10 @@ function setTokenCookie(req, res) {
       if (!err && lineupuser) {
         lineupuser.user = req.user._id;
         lineupuser.save(function (err) {
-          res.redirect('/');
+          req.user.phone = lineupuser.phone;
+          req.user.save(function (err) {
+            res.redirect('/');
+          });
         });
       }
     });
