@@ -21,10 +21,10 @@
             <h3 class="list-group-item-heading">
                 {{ lineup.title }}
                 <small class="pull-right lineup-current-people">
-                    <span ng-switch="lineup.count">
+                    <span ng-switch="lineup.stats.count">
                         <span ng-switch-when="0">No one</span>
                         <span ng-switch-when="1">1 person</span>
-                        <span ng-switch-default>{{lineup.count}} people</span>
+                        <span ng-switch-default>{{lineup.stats.count}} people</span>
                     </span>
                     currently in line
                 </small>
@@ -32,16 +32,16 @@
             <hr>
             <div class="row">
                 <div class="col-md-4 stat-container">
-                    <h2>{{ (lineup.wait ? lineup.wait + " min" : "-") }}</h2>
-                    <p><small>Average wait time</small></p>
+                    <h2>{{ (lineup.stats.wait ? lineup.stats.wait + " min" : "-") }}</h2>
+                    <p><small>Average wait time today</small></p>
                 </div>
                 <div class="col-md-4 stat-container">
-                    <h2>{{ lineup.stats.totalPeopleInLine || "-" }}</h2>
+                    <h2>{{ lineup.stats.total || "-" }}</h2>
                     <p><small>Total people in line today</small></p>
                 </div>
                 <div class="col-md-4 stat-container">
-                    <h2 class="danger">{{ lineup.stats.averageNoShows || "-" }}</h2>
-                    <p><small>Total no-shows for today</small></p>
+                    <h2 class="danger">{{ lineup.stats.noshow || "-" }}</h2>
+                    <p><small>Total no-shows today</small></p>
                 </div>
             </div>
         </a>
