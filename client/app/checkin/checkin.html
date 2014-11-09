@@ -35,12 +35,13 @@
 				<h3 class = "list-group-item-heading">
 					<span class="glyphicon glyphicon-user"> </span>{{checkin.fullName(guest)}}
 				</h3>
+				<span></span>
 			</div>
 			<div class="col-md-4 ">
 				<h3><small>Number of seats reserved: </small>{{guest.groupSize}}</h3>
 			</div>
 			<div class="col-md-4 ">
-				<button > <span class = "glyphicon glyphicon-ok"></span>
+				<button ng-click="Checkout($index)"> <span class = "glyphicon glyphicon-ok"></span>
 				</button>
 				<button ng-click="DeleteGuest($index)"> <span class = "glyphicon glyphicon-remove"></span>
 				</button>
