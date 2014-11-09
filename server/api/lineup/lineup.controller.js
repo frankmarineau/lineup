@@ -39,6 +39,7 @@ exports.show = function (req, res) {
 
 exports.create = function (req, res) {
   if (req.user.hasRole('admin')) {
+    req.body.owner = req.user._id;
     Lineup.create(req.body, function (err, lineup) {
       if (err) return handleError(res, err);
       return res.json(200, lineup);
