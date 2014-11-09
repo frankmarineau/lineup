@@ -85,7 +85,7 @@ exports.update = function (req, res) {
 
 exports.destroy = function (req, res) {
   if (req.user.hasRole('admin')) {
-    Lineup.find({ _id: req.params.id, owner: req.user._id }, function (err, lineup) {
+    Lineup.findOne({ _id: req.params.id, owner: req.user._id }, function (err, lineup) {
       if (err) return handleError(res, err);
       if (!lineup) return res.send(404);
       lineup.remove(function (err) {

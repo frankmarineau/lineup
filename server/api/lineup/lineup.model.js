@@ -19,6 +19,14 @@ var LineupSchema = new Schema({
   active: { type: Boolean, default: true }
 });
 
+LineupSchema.methods.userCount = function (cb) {
+  this.model('Lineupuser').count({ lineup: this._id, timeLeave: null }, cb);
+};
+
+LineupSchema.methods.noshowCount = function (cb) {
+  this.model('Lineupuser').count({ lineup: this._id, noShow: true }, cb);
+}
+
 LineupSchema.methods.averageWait = function (cb) {
   this.model('Lineupuser').find({ lineup: this._id, timeLeave: { $gt: 0 } }, function (err, lineupusers) {
     if (err) return cb(err, lineupusers);
@@ -26,7 +34,25 @@ LineupSchema.methods.averageWait = function (cb) {
     lineupusers.forEach(function (lineupuser) {
       n += lineupuser.timeJoin - lineupuser.timeLeave;
     });
-    cb(err, n / lineupusers.length);
+    cb(err, Math.round(n / lineupusers.length));
+  });
+};
+
+LineupSchema.methods.lineupStats = function (cb) {
+  var self = this;
+  var stats = { count: 0, noshow: 0, wait: 0 }
+  this.userCount(function (err, count) {
+    if (err) return cb(err, stats);
+    stats.count = count;
+    self.noshowCount(function (err, noshow) {
+      if (err) return cb(err, stats);
+      stats.noshow = noshow;
+      self.averageWait(function (err, wait) {
+        if (err) return cb(err, stats);
+        stats.wait = Math.round(wait / 1000 / 60);
+        return cb(err, stats);
+      });
+    });
   });
 };
 
