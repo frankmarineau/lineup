@@ -16,7 +16,10 @@ exports.index = function (req, res) {
       return res.json(200, lineups);
     });
   } else {
-    return res.send(501, 'Not Implemented');
+    Lineupuser.find({ user: req.user._id, timeLeave: null }).populate('lineup').exec(function (err, lineupusers) {
+      if (err) return handleError(res, err);
+      return res.json(200, lineupusers);
+    });
   }
 };
 
