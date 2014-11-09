@@ -15,6 +15,8 @@ function requiredProcessEnv(name) {
 var all = {
   env: process.env.NODE_ENV,
 
+  domain: process.env.DOMAIN,
+
   // Root path of server
   root: path.normalize(__dirname + '/../../..'),
 
@@ -42,8 +44,8 @@ var all = {
   },
 
   facebook: {
-    clientID:     process.env.FACEBOOK_ID || 'id',
-    clientSecret: process.env.FACEBOOK_SECRET || 'secret',
+    clientID:     process.env.FACEBOOK_ID || '667391593359881',
+    clientSecret: process.env.FACEBOOK_SECRET || '726bf2f3d9f9efa13def5c8a08ad394c',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/facebook/callback'
   },
 
