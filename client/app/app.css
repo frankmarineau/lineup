@@ -106,7 +106,8 @@
   height:40px;
 }
 .logo-link {
-  margin-right:10px;
+  margin-left: 20px;
+  float: left;
 }
 
 #signup-button {
