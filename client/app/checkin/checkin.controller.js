@@ -4,7 +4,7 @@ angular.module('lineupApp')
   .controller('CheckinCtrl', function ($scope, Checkin, Lineup, $routeParams) {
     $scope.lineup = Lineup.get({id: $routeParams.id});
 
-    var refreshGuestList = function(){
+    var refreshGuestList = function() {
     	$scope.checkin = Checkin.query();
     }
 
