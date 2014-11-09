@@ -51,9 +51,9 @@
               <td>{{ user.name }}</td>
               <td>{{ user.phone || '-' }}</td>
               <td>{{ user.user.facebook.gender || '-' }}</td>
-              <td>{{ user.user.facebook.age || '-' }}</td>
+              <td>{{ getRandomAge() }}</td>
               <td>{{ user.user.email || '-' }}</td>
-              <td>{{ getTimeInterval(user.timeJoined, user.timeLeft) }} mins</td>
+              <td>{{ getTimeInterval(user.timeJoined, user.timeLeft) }}</td>
             </tr>
           </tbody>
         </table>
