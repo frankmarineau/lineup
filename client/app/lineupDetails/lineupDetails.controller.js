@@ -105,4 +105,9 @@ angular.module('lineupApp')
         console.log("error POSTing settings")
       });
     };
+
+    $scope.deleteLineup = function() {
+      Lineup.remove({ id: $scope.lineup._id });
+      $location.path('/lineups');
+    };
   });
