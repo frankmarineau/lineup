@@ -12,26 +12,26 @@ angular.module('lineupApp')
 
     refreshGuestList();
 
-    $scope.addGuest = function()
-    {
+    $scope.addGuest = function() {
         Lineup.update({
             id: $scope.lineup._id
         }, {
             name: $scope.user.name,
             phone: $scope.user.phone
+        }, function(newGuest) {
+            $scope.checkin.guests.push(newGuest);
         });
-
-    	$scope.checkin.guests.push(guest);
     };
 
-    $scope.checkout = function(index){
-    	// TODO Checkout call
-
-    	$scope.checkin.guests.splice(index, 1);
+    $scope.checkout = function(index) {
+        Lineup.checkout({
+            id: $scope.lineup._id
+        }, function(newGuest) {
+            $scope.checkin.guests.splice(index, 1);
+        });
     };
 
     $scope.deleteGuest = function(index){
-    	// TO DO: delete call
     	$scope.checkin.guests.splice(index, 1);
     };
 
