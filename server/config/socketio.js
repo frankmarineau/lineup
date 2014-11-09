@@ -18,7 +18,6 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
-  require('../api/field/field.socket').register(socket);
   require('../api/lineup/lineup.socket').register(socket);
   require('../api/lineupuser/lineupuser.socket').register(socket);
 }

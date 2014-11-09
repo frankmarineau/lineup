@@ -2,56 +2,39 @@
 
 var _ = require('lodash');
 var Lineup = require('./lineup.model');
+var Lineupuser = require('../lineupuser/lineupuser.model');
 
-// Get list of lineups
 exports.index = function(req, res) {
-  req.user.findLineups(function (err, lineups) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, lineups);
-  });
+  if (req.user.hasRole('admin')) {
+    Lineup.find({ owner: req.user._id }, function (err, lineups) {
+      if (err) return handleError(res, err);
+      return res.json(200, lineups);
+    });
+  } else if (req.user.hasRole('clerk')) {
+    return res.send(501, 'Not Implemented');
+  } else {
+    return res.send(501, 'Not Implemented');
+  }
 };
 
-// Get a single lineup
 exports.show = function(req, res) {
-  Lineup.findById(req.params.id, function (err, lineup) {
-    if(err) { return handleError(res, err); }
-    if(!lineup) { return res.send(404); }
-    return res.json(lineup);
-  });
-};
-
-// Creates a new lineup in the DB.
-exports.create = function(req, res) {
-  Lineup.create(req.body, function(err, lineup) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, lineup);
-  });
-};
-
-// Updates an existing lineup in the DB.
-exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  Lineup.findById(req.params.id, function (err, lineup) {
-    if (err) { return handleError(res, err); }
-    if(!lineup) { return res.send(404); }
-    var updated = _.merge(lineup, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, lineup);
+  if (req.user.hasRole('clerk')) {
+    Lineup.findById(req.params.id, function (err, lineup) {
+      if (err) return handleError(res, err);
+      if (!lineup) return res.send(404);
+      Lineupuser.find({ lineup: lineup._id }).populate('user').exec(function (err, lineupusers) {
+        if (err) return handleError(res, err);
+        lineup.clients = lineupusers;
+        return res.json(lineup);
+      });
     });
-  });
-};
-
-// Deletes a lineup from the DB.
-exports.destroy = function(req, res) {
-  Lineup.findById(req.params.id, function (err, lineup) {
-    if(err) { return handleError(res, err); }
-    if(!lineup) { return res.send(404); }
-    lineup.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.send(204);
+  } else {
+    Lineup.findById(req.params.id, function (err, lineup) {
+      if (err) return handleError(res, err);
+      if (!lineup) return res.send(404);
+      return res.json(lineup);
     });
-  });
+  }
 };
 
 function handleError(res, err) {
