@@ -2,11 +2,9 @@
 
 angular.module('lineupApp')
   .controller('CheckinCtrl', function ($scope, Checkin, Lineup, $routeParams) {
-    $scope.message = 'Hello';
-
     $scope.lineup = Lineup.get({id: $routeParams.id});
 
-    var refreshGuestList = function(){
+    var refreshGuestList = function() {
     	$scope.checkin = Checkin.query();
     }
 
@@ -32,6 +30,12 @@ angular.module('lineupApp')
     };
 
     $scope.deleteGuest = function(index){
+        Lineup.noshow({
+            id: $scope.lineup._id
+        }, function(newGuest) {
+            $scope.checkin.guests.splice(index, 1);
+        });
+
     	$scope.checkin.guests.splice(index, 1);
     };
 
