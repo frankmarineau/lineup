@@ -17,17 +17,13 @@ angular.module('lineupApp')
 
     		var guests = [{
     			id: 12345345543,
-    			firstName: 'Marc-Antoine',
-    			lastName: 'Babin',
-    			phoneNumber: '819-238-1313',
-    			groupSize: 5
+    			name: 'Marc-Antoine',
+    			phoneNumber: '819-238-1313'
     		},
     		{
     			id: 12345349943,
-    			firstName: 'Olivier',
-    			lastName: 'Charbonneau',
-    			phoneNumber: '819-911',
-    			groupSize: 2
+    			name: 'Olivier',
+    			phoneNumber: '819-911'
     			
     		}];
     		return{
