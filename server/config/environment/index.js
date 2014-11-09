@@ -44,8 +44,8 @@ var all = {
   },
 
   facebook: {
-    clientID:     process.env.FACEBOOK_ID || '667391593359881',
-    clientSecret: process.env.FACEBOOK_SECRET || '726bf2f3d9f9efa13def5c8a08ad394c',
+    clientID:     process.env.FACEBOOK_ID || '747100565362319',
+    clientSecret: process.env.FACEBOOK_SECRET || '07f211efde92df592099f4fee816979b',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/facebook/callback'
   },
 
@@ -65,6 +65,10 @@ var all = {
     accountID: process.env.TWILIO_ID || 'ACb9ee0e8abe929f76087e39a029d851b8',
     accountToken: process.env.TWILIO_TOKEN || '02bde46a670b22fe8bba6e4a8ee14947',
     accountNumber: process.env.TWILIO_NUMBER || '+15145000443'
+  },
+
+  googl: {
+    apiKey: process.env.GOOGL_KEY || 'AIzaSyCKIb7O2zcFuWJUGh0z1bmdi8MzxruPK1M'
   }
 };
 
