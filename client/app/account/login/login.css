@@ -25,6 +25,9 @@
   .connect-with > div {
     margin-bottom:10px;
   }
+  .connect-with > div > a{
+    padding: 15px 0 15px;
+  }
   .connect-with a {
     width: 100%;
   }
