@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lineupApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
+  .controller('LoginCtrl', function ($scope, Auth, $location, $window, User) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -13,12 +13,10 @@ angular.module('lineupApp')
           email: $scope.user.email,
           password: $scope.user.password
         })
-        .then( function() {
-          console.log(Auth.getCurrentUser().role);
-          switch(Auth.getCurrentUser().role) {
-            default:
-              break;
-          }
+        .then(function() {
+          Auth.getCurrentUser().$promise.then(function() {
+            $location.path('/');
+          });
         })
         .catch( function(err) {
           $scope.errors.other = err.message;
