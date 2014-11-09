@@ -4,27 +4,13 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var LineupSchema = new Schema({
-  title: { type: String, required: true },
+  title: String,
   owner: { type: Schema.Types.ObjectId, ref: 'User' },
-  config: {
-    customFields: [{ type: Schema.Types.ObjectId, ref: 'Field' }],
-    maxPeopleInQueue: Number,
-    hours: {
-      open: {
-        hour: Number,
-        minute: Number
-      },
-      close: {
-        hour: Number,
-        minute: Number
-      }
-    },
-    active: Boolean
-  }
+  maxInQueue: Number,
+  openingHour: Number,
+  closingHour: Number,
+  welcomeMessage: String,
+  active: Boolean
 });
-
-LineupSchema.methods.findUsers = function (cb) {
-  this.model('Lineupuser').find({ lineup: this._id }).populate('user').exec(cb);
-};
 
 module.exports = mongoose.model('Lineup', LineupSchema);
