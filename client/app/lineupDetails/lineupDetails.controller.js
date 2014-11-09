@@ -2,12 +2,19 @@
 
 angular.module('lineupApp')
   .controller('LineupdetailsCtrl', function ($scope, Lineup, $routeParams, $http, Auth, $location) {
-    console.log(Auth.getCurrentUser());
     if (Auth.getCurrentUser().role === "clerk") {
       $location.path('/checkin/' + $routeParams.id);
     }
 
-    $scope.lineup = Lineup.get({id: $routeParams.id});
+    Lineup.get({id: $routeParams.id}).$promise.then(function(lineup) {
+      $scope.lineup = lineup;
+      $scope.openingHour = new Date();
+      $scope.openingHour.setHours(lineup.opening.hour);
+      $scope.openingHour.setMinutes(lineup.opening.minute);
+      $scope.closingHour = new Date();
+      $scope.closingHour.setHours(lineup.closing.hour);
+      $scope.closingHour.setMinutes(lineup.closing.minute);
+    });
 
     $scope.achalandageChart = {
       labels : [],
@@ -116,16 +123,18 @@ angular.module('lineupApp')
     $scope.$watch('dateRange', pickDateRange);
 
     $scope.updateSettings = function() {
-      $http.post('/users/settings', {
-        title: $scope.title,
-        maxInQueue: $scope.maxInQueue,
-        openingHour: $scope.openingHour,
-        closingHour: $scope.closingHour,
-        welcomeMessage: $scope.welcomeMessage
-      }).success(function(data) {
-
-      }).error(function(data, status, headers, config) {
-        console.log("error POSTing settings")
+      Lineup.update({id: $scope.lineup._id}, {
+        title: $scope.lineup.title,
+        maxInQueue: $scope.lineup.maxInQueue,
+        opening: {
+          hour: $scope.openingHour.getHours(),
+          minute: $scope.openingHour.getMinutes()
+        },
+        closing: {
+          hour: $scope.closingHour.getHours(),
+          minute: $scope.closingHour.getMinutes()
+        },
+        welcomeMessage: $scope.lineup.welcomeMessage
       });
     };
 
