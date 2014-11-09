@@ -58,5 +58,5 @@ body {
     float: left;
 }
 .lineup-list-container .add-lineup {
-  max-width: 300px;
+  width: 300px;
 }
