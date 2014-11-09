@@ -11,7 +11,7 @@
     line-height: 1;
     letter-spacing: -1px;
 }
-.fa-8x {
+.fa-large {
   font-size: 8em;
 }
 .fa-angle-double-down {
@@ -22,7 +22,7 @@
 
 .intro {
     height: 100%;
-    padding: 30px 15px;
+    padding: 30px;
     color: #F5F5F5;
     text-align: center;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
@@ -101,4 +101,52 @@
 }
 .footer .container {
   padding-top: 10px;
+}
+
+@media only screen and (max-device-width: 768px) {
+  .intro .hero-inside {
+    margin: auto;
+    width: 100%;
+  }
+  .intro .hero-content {
+    top: 30%;
+  }
+  .fa-large {
+    font-size: 4em;
+  }
+  #banner h1 {
+    font-size: 4em;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .intro {
+    padding: 0;
+  }
+  .intro .next {
+    top: 83%;
+  }
+  .hero-inside .col-md-3, .hero-inside .col-md-9 {
+    margin-right: 0;
+    margin-left: 30px;
+  }
+  .what {
+    height: 700px;
+  }
+  .what .row {
+    padding-top: 15px;
+  }
+  .what .col-md-4 {
+    padding-top: 30px;
+  }
+  .mission {
+    height: 425px;
+  }
+  .mission h1 {
+    padding-bottom: 25px;
+    font-size: 3em;
+  }
+  .mission p {
+    padding-top: 30px;
+    font-size: 1.5em;
+  }
 }
