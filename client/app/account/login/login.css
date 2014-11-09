@@ -32,6 +32,7 @@
   text-align: center;
   margin: 15px 0 35px;
   color: #4a4a4a;
+  padding-top: 0;
 }
 .login-inside .btn-login {
   width: 100%;
