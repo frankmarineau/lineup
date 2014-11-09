@@ -55,7 +55,7 @@
 }
 .intro .next {
   position: absolute;
-  top: 88%;
+  bottom: 30px;
   left: 50%;
   cursor: pointer;
   opacity: 0.75;
@@ -98,7 +98,7 @@
 }
 .what .what-text h2 {
   color: #333;
-  font-size: 30px;
+  font-size: 29px;
 }
 
 .mission {
@@ -210,5 +210,70 @@
   .mission p {
     padding-top: 30px;
     font-size: 1.5em;
+  }
+}
+
+.floating{
+  animation-name: floating;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+
+  -webkit-animation-name: floating;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+
+  -moz-animation-name: floating;
+  -moz-animation-duration: 2s;
+  -moz-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes floating {
+  0% {
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(15px);
+    -webkit-transform: translateY(15px);
+  }
+  100% {
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+  }
+}
+
+@-webkit-keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translate3d(0,20px,0);
+    -webkit-transform: translate3d(0,20px,0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0);
+    -webkit-transform: translate3d(0);
+  }
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translate3d(0,20px,0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0);
   }
 }
