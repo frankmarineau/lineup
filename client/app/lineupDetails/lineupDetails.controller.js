@@ -2,7 +2,7 @@
 
 angular.module('lineupApp')
   .controller('LineupdetailsCtrl', function ($scope, Lineup, $routeParams, $http) {
-    $scope.lineup = Lineup.get($routeParams._id);
+    $scope.lineup = Lineup.get({id: $routeParams.id});
 
     $scope.achalandageChart = {
       labels : [],

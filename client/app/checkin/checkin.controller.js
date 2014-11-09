@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('lineupApp')
-  .controller('CheckinCtrl', function ($scope, Checkin) {
-    
-    $scope.message = 'Hello';    
+  .controller('CheckinCtrl', function ($scope, Checkin, Lineup, $routeParams) {
+    $scope.message = 'Hello';
+
+    $scope.lineup = Lineup.get({id: $routeParams.id});
 
     var refreshGuestList = function(){
     	$scope.checkin = Checkin.query();
@@ -11,9 +12,15 @@ angular.module('lineupApp')
 
     refreshGuestList();
 
-    $scope.addGuest = function(form)
+    $scope.addGuest = function()
     {
-    	// TO DO: implement the add
+        Lineup.update({
+            id: $scope.lineup._id
+        }, {
+            name: $scope.user.name,
+            phone: $scope.user.phone
+        });
+
     	$scope.checkin.guests.push(guest);
     };
 
