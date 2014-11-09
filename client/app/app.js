@@ -7,8 +7,7 @@ angular.module('lineupApp', [
   'ngRoute',
   'btford.socket-io',
   'ui.bootstrap',
-  'angles',
-  'ui.router'
+  'angles'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
