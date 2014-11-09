@@ -37,7 +37,7 @@ exports.show = function (req, res) {
         lineup.averageWait(function (err, wait) {
           if (err) return handleError(res, err);
           lineup = lineup.toObject();
-          lineup.clients = lineupusers;
+          lineup.users = lineupusers;
           lineup.wait = wait;
           return res.json(200, lineup);
         });
