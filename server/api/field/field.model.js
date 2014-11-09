@@ -5,9 +5,9 @@ var mongoose = require('mongoose'),
 
 var FieldSchema = new Schema({
   title: { type: String, required: true },
+  lineup: { type: Schema.Types.ObjectId, ref: 'Lineup', required: true },
   required: { type: Boolean, default: false },
-  description: String,
-  lineup: { type: Schema.Types.ObjectId, ref: 'Lineup', required: true }
+  description: String
 });
 
 module.exports = mongoose.model('Field', FieldSchema);

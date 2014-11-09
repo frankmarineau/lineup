@@ -12,22 +12,23 @@ var User = require('../api/user/user.model');
 User.find({}).remove(function () {
   User.create({
     provider: 'local',
-    role: 'clerk',
-    name: 'Hostess',
-    email: 'hostess@lineup.com',
-    password: 'hostess'
-  }, function () {
-    console.log('finished populating hostesses');
-  });
-
-  User.create({
-    provider: 'local',
     role: 'admin',
     name: 'Admin',
     email: 'admin@lineup.com',
     password: 'admin'
   }, function (err, admin) {
     console.log('finished populating admin');
+
+    User.create({
+      provider: 'local',
+      role: 'clerk',
+      name: 'Hostess',
+      email: 'hostess@lineup.com',
+      password: 'hostess',
+      manager: admin._id
+    }, function () {
+      console.log('finished populating hostesses');
+    });
 
     Lineup.find({}).remove(function () {
       Lineup.create({
