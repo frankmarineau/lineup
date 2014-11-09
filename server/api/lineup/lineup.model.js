@@ -4,13 +4,19 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var LineupSchema = new Schema({
-  title: String,
-  owner: { type: Schema.Types.ObjectId, ref: 'User' },
-  maxInQueue: Number,
-  openingHour: Number,
-  closingHour: Number,
+  title: { type: String, required: true },
+  owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   welcomeMessage: String,
-  active: Boolean
+  maxInQueue: { type: Number, default: 0 },
+  opening: {
+    hour: Number,
+    minute: Number
+  },
+  closing: {
+    hour: Number,
+    minute: Number,
+  },
+  active: { type: Boolean, default: true }
 });
 
 module.exports = mongoose.model('Lineup', LineupSchema);

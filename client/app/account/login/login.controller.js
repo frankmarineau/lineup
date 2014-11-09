@@ -14,8 +14,11 @@ angular.module('lineupApp')
           password: $scope.user.password
         })
         .then( function() {
-          // Logged in, redirect to home
-          $location.path('/');
+          console.log(Auth.getCurrentUser().role);
+          switch(Auth.getCurrentUser().role) {
+            default:
+              break;
+          }
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

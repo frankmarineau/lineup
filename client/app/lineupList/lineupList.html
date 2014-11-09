@@ -3,9 +3,9 @@
 <div class="col-md-6 col-md-offset-3 lineup-list-container">
     <h1>Your Lineups</h1>
     <div class="list-group">
-      <a href="/lineups/{{lineup.id}}" class="list-group-item lineup-element" ng-repeat="lineup in lineups">
+      <a href="/lineups/{{lineup._id}}" class="list-group-item lineup-element" ng-repeat="lineup in lineups">
         <h3 class="list-group-item-heading">
-            {{lineup.title}}
+            {{ lineup.title }}
             <small class="pull-right lineup-current-people">
                 <span ng-switch="lineup.guests.length">
                     <span ng-switch-when="0">No one</span>
@@ -18,18 +18,33 @@
         <hr>
         <div class="row">
             <div class="col-md-4 stat-container">
-                <h2>{{lineup.stats.averageWaitTime}} min</h2>
-                <p><small>Average wait time</small></p>
+                <h2>{{ (lineup.stats.averageWaitTime ? lineup.stats.averageWaitTime + " min" : "-") }}</h2>
+                <p><small>avg wait time</small></p>
             </div>
             <div class="col-md-4 stat-container">
-                <h2>{{lineup.stats.averagePeopleInLine}}</h2>
-                <p><small>People in lineup per day</small></p>
+                <h2>{{ lineup.stats.averagePeopleInLine || "-" }}</h2>
+                <p><small>people in lineup per day</small></p>
             </div>
             <div class="col-md-4 stat-container">
-                <h2 class="danger">{{lineup.stats.averageNoShows}}</h2>
-                <p><small>Average no-shows per day</small></p>
+                <h2 class="text-danger">{{ lineup.stats.averageNoShows || "-" }}</h2>
+                <p><small>avg no-shows per day</small></p>
             </div>
         </div>
       </a>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Add a new lineup</h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-inline" role="form" ng-submit="addLineup()">
+              <div class="form-group">
+                <label class="sr-only" for="name">Title</label>
+                <input type="text" class="form-control" id="name" style="width: 300px;" placeholder="Enter your new lineup's name" ng-model="title">
+              </div>
+              <button type="submit" class="btn btn-default">Add</button>
+            </form>
+        </div>
     </div>
 </div>
