@@ -15,4 +15,8 @@ angular.module('lineupApp')
     $scope.isActive = function(route) {
       return route === $location.path();
     };
+
+    $scope.isUser = function() {
+      return Auth.getCurrentUser().role === 'user';
+    };
   });

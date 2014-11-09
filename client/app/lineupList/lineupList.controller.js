@@ -1,7 +1,12 @@
 'use strict';
 
 angular.module('lineupApp')
-  .controller('LineuplistCtrl', function ($scope, Lineup, $location, $interval) {
+  .controller('LineuplistCtrl', function ($scope, Lineup, $location, $interval, Auth) {
+
+    $scope.isAdmin = function() {
+        return Auth.isAdmin();
+    }
+
     var refreshLineups = function() {
         Lineup.query({}, function(lineups) {
             $scope.lineups = lineups;
@@ -12,7 +17,7 @@ angular.module('lineupApp')
     var intervalPromise = $interval(refreshLineups, 3000);
 
     $scope.$on('$destroy',function(){
-        if(intervalPromise) {
+        if (intervalPromise) {
             $interval.cancel(intervalPromise);
         }
     });

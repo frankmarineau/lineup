@@ -14,11 +14,11 @@ angular.module('lineupApp')
         isArray: false
       },
       checkout: {
-        url: '/api/lineups/:id?noshow=0',
+        url: '/api/lineupusers/:id?noshow=0',
         method: 'DELETE'
       },
       noshow: {
-        url: '/api/lineups/:id?noshow=1',
+        url: '/api/lineupusers/:id?noshow=1',
         method: 'DELETE'
       }
     });
