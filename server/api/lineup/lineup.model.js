@@ -69,4 +69,9 @@ LineupSchema.methods.lineupStats = function (cb) {
   });
 };
 
+LineupSchema.pre('remove', function (next) {
+  this.model('Lineupuser').remove({ lineup: this._id }).exec();
+  next();
+});
+
 module.exports = mongoose.model('Lineup', LineupSchema);
