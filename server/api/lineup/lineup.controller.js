@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
+var async = require('async');
 var Lineup = require('./lineup.model');
 var Lineupuser = require('../lineupuser/lineupuser.model');
 var User = require('../user/user.model');
@@ -10,17 +11,47 @@ exports.index = function (req, res) {
   if (req.user.hasRole('admin')) {
     Lineup.find({ owner: req.user._id }, function (err, lineups) {
       if (err) return handleError(res, err);
-      return res.json(200, lineups);
+      async.map(lineups, function (lineup, callback) {
+        lineup.lineupStats(function (err, stats) {
+          lineup = lineup.toObject();
+          lineup.count = stats.count;
+          lineup.wait = Math.round(stats.count * stats.wait / 1000 / 60);
+          callback(err, lineup);
+        });
+      }, function (err, lineups) {
+        if (err) return handleError(res, err);
+        return res.json(200, lineups);
+      });
     });
   } else if (req.user.hasRole('clerk')) {
     Lineup.find({ owner: req.user.manager }, function (err, lineups) {
       if (err) return handleError(res, err);
-      return res.json(200, lineups);
+      async.map(lineups, function (lineup, callback) {
+        lineup.lineupStats(function (err, stats) {
+          lineup = lineup.toObject();
+          lineup.count = stats.count;
+          lineup.wait = Math.round(stats.count * stats.wait / 1000 / 60);
+          callback(err, lineup);
+        });
+      }, function (err, lineups) {
+        if (err) return handleError(res, err);
+        return res.json(200, lineups);
+      });
     });
   } else {
     Lineupuser.find({ user: req.user._id, timeLeft: null }).populate('lineup').exec(function (err, lineupusers) {
       if (err) return handleError(res, err);
-      return res.json(200, lineupusers);
+      async.map(lineupusers, function (lineupuser, callback) {
+        lineupuser.userStats(function (err, stats) {
+          lineupuser = lineupuser.toObject();
+          lineupuser.count = stats.count;
+          lineupuser.wait = Math.round(stats.count * stats.wait / 1000 / 60);
+          callback(err, lineupuser);
+        });
+      }, function (err, lineupusers) {
+        if (err) return handleError(res, err);
+        return res.json(200, lineupusers);
+      });
     });
   }
 };
@@ -37,12 +68,23 @@ exports.show = function (req, res) {
           if (err) return handleError(res, err);
           lineup = lineup.toObject();
           lineup.users = lineupusers;
-          lineup.stats = stats;
+          lineup.count = stats.count;
+          lineup.wait = Math.round(stats.count * stats.wait / 1000 / 60);
           return res.json(200, lineup);
         });
       });
     } else {
-      return res.json(200, lineup);
+      Lineupuser.findOne({ lineup: lineup._id, user: req.user._id, timeLeft: null }, function (err, lineupuser) {
+        if (err) return handleError(res, err);
+        lineupuser.userStats(function (err, stats) {
+          if (err) return handleError(res, err);
+          lineupuser = lineupuser.toObject();
+          lineupuser.lineup = lineup;
+          lineupuser.count = stats.count;
+          lineupuser.wait = Math.round(stats.count * stats.wait / 1000 / 60);
+          return res.json(200, lineupuser);
+        });
+      });
     }
   });
 };
