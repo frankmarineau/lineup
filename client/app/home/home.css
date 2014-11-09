@@ -77,6 +77,7 @@
 
 .what {
   height: 450px;
+  background-color: white;
 }
 .what .row {
   padding-top: 90px;
@@ -96,5 +97,8 @@
     text-align: center;
     padding: 30px 0;
     border-top: 1px solid #E5E5E5;
-    background-color: #EAEEF2;
+    background-color: white;
+}
+.footer .container {
+  padding-top: 10px;
 }
