@@ -3,7 +3,7 @@
 angular.module('lineupApp')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/checkin/:id', {
+      .when('/checkins/:id', {
         templateUrl: 'app/checkin/checkin.html',
         controller: 'CheckinCtrl',
         authenticate: true

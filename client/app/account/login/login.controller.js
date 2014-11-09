@@ -14,8 +14,13 @@ angular.module('lineupApp')
           password: $scope.user.password
         })
         .then(function() {
-          Auth.getCurrentUser().$promise.then(function() {
-            $location.path('/');
+          Auth.getCurrentUser().$promise.then(function(user) {
+            if (user.role === "admin" || user.role === "clerk") {
+              $location.path('/lineups');
+            }
+            else if (user.role === "user") {
+              $location.path('/guests');
+            }
           });
         })
         .catch( function(err) {

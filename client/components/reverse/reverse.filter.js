@@ -3,6 +3,6 @@
 angular.module('lineupApp')
   .filter('reverse', function () {
     return function (items) {
-      return items.slice().reverse();
+      return (items ? items.slice().reverse() : []);
     };
   });
