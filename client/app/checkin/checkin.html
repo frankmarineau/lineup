@@ -1,8 +1,6 @@
 <div class="container">
-  <h1>
-    Welcome to <span >{{lineup.title}}</span>'s check in system
-  </h1>
-  <h2>Check in</h2>
+  <h1>{{lineup.title}}</h1>
+
   <form class="form checkin-form" name="form" ng-submit="addGuest()" novalidate>
     <div class="form-group">
       <input type="text" class="form-control" ng-model="user.name" placeholder="Name" required>
