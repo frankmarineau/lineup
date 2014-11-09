@@ -3,7 +3,7 @@
 angular.module('lineupApp')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/clientLogin', {
+      .when('/guests/:lineupUserId', {
         templateUrl: 'app/clientLogin/clientLogin.html',
         controller: 'ClientloginCtrl'
       });
