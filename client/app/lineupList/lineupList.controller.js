@@ -1,16 +1,21 @@
 'use strict';
 
 angular.module('lineupApp')
-  .controller('LineuplistCtrl', function ($scope, Lineup, $location) {
+  .controller('LineuplistCtrl', function ($scope, Lineup, $location, $interval) {
     var refreshLineups = function() {
-        $scope.lineups = Lineup.query();
+        Lineup.query({}, function(lineups) {
+            $scope.lineups = lineups;
+        });
     };
-    refreshLineups();
-    setInterval(refreshLineups, 3000);
 
-    if ($scope.lineups.length == 1) {
-        $location.path('lineups/' + $scope.lineups[0]._id);
-    }
+    refreshLineups();
+    var intervalPromise = $interval(refreshLineups, 3000);
+
+    $scope.$on('$destroy',function(){
+        if(intervalPromise) {
+            $interval.cancel(intervalPromise);
+        }
+    });
 
     $scope.addLineup = function() {
         Lineup.save({
