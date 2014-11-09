@@ -25,7 +25,8 @@ angular.module('lineupApp')
     };
 
     $scope.chartOptions = {
-      scaleStartValue: 0
+      scaleStartValue: 0,
+      animationSteps : 30
     };
 
     $scope.dateRange = 'week';
