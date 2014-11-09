@@ -154,6 +154,8 @@ exports.enqueue = function (req, res) {
         User.findById(req.body.user, function (err, user) {
           if (err) return handleError(res, err);
           if (!user) return res.send(404);
+          req.body.name = req.body.name || user.name;
+          req.body.phone = req.body.phone || user.phone;
           Lineupuser.create(req.body, function (err, lineupuser) {
             if (err) return handleError(res, err);
             if (user.phone) {
@@ -167,7 +169,11 @@ exports.enqueue = function (req, res) {
       } else if (req.body.phone) {
         User.findOne({ phone: req.body.phone }, function (err, user) {
           if (err) return handleError(res, err);
-          if (user) req.body.user = user._id;
+          if (user) {
+            req.body.user = user._id;
+            req.body.name = req.body.name || user.name;
+            req.body.phone = req.body.phone || user.phone;
+          }
           Lineupuser.create(req.body, function (err, lineupuser) {
             if (err) return handleError(res, err);
             sendMessages(req.body, lineup, lineupuser, function (err, res) {
