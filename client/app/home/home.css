@@ -89,9 +89,10 @@
 }
 .mission p {
   font-size: 2em;
+  padding-top: 20px;
 }
 .mission h1 {
-  padding-bottom: 75px;
+  padding-bottom: 50px;
 }
 .footer {
     text-align: center;
@@ -107,7 +108,7 @@
   .intro .hero-inside {
     margin: auto;
     width: 100%;
-    text-shadow: 1.2px 1.2px 1px rgba(0, 0, 0, 0.75);  
+    text-shadow: 1.2px 1.2px 1px rgba(0, 0, 0, 0.75);
   }
   .intro .hero-content {
     top: 30%;
