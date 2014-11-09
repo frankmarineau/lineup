@@ -18,7 +18,7 @@ exports.index = function (req, res) {
       return res.json(200, lineups);
     });
   } else {
-    Lineupuser.find({ user: req.user._id, timeLeave: null }).populate('lineup').exec(function (err, lineupusers) {
+    Lineupuser.find({ user: req.user._id, timeLeft: null }).populate('lineup').exec(function (err, lineupusers) {
       if (err) return handleError(res, err);
       return res.json(200, lineupusers);
     });
@@ -31,14 +31,13 @@ exports.show = function (req, res) {
     if (!lineup) return res.send(404);
 
     if (req.user.hasRole('clerk')) {
-      Lineupuser.find({ lineup: lineup._id, timeLeave: null }).populate('user').exec(function (err, lineupusers) {
+      Lineupuser.find({ lineup: lineup._id, timeLeft: null }).populate('user').exec(function (err, lineupusers) {
         if (err) return handleError(res, err);
-        console.log(lineupusers);
-        lineup.averageWait(function (err, wait) {
+        lineup.lineupStats(function (err, stats) {
           if (err) return handleError(res, err);
           lineup = lineup.toObject();
           lineup.users = lineupusers;
-          lineup.wait = wait;
+          lineup.stats = stats;
           return res.json(200, lineup);
         });
       });
@@ -114,16 +113,12 @@ exports.enqueue = function (req, res) {
             if (err) return handleError(res, err);
             if (user.phone) {
               twilio.sendMessage(req.body.phone, 'Welcome ' + user.name + ' to the ' + lineup.title + ' line-up.', function (err, msg) {
-                if (err) return;
-                Lineupuser.count({
-                  lineup: lineup._id,
-                  timeJoin: { $lte: lineupuser.timeJoin },
-                  timeLeave: null
-                }, function (err, count) {
-                  if (err) return;
+                if (err) return console.log(err);
+                lineupuser.userPosition(function (err, pos) {
+                  if (err) return console.log(err);
                   lineup.averageWait(function (err, wait) {
-                    if (err) return;
-                    twilio.sendMessage(user.phone, 'You are ' + numberString(count) + ' in line. Est. wait time is ' + Math.round(wait * count / 1000 / 60) + 'min. Live status @ http://t.co/1337');
+                    if (err) return console.log(err);
+                    twilio.sendMessage(user.phone, 'You are ' + numberString(pos) + ' in line. Est. wait time is ' + Math.round(pos * wait / 1000 / 60) + 'min. Live status @ http://t.co/1337');
                   });
                 });
               });
@@ -138,16 +133,12 @@ exports.enqueue = function (req, res) {
           Lineupuser.create(req.body, function (err, lineupuser) {
             if (err) return handleError(res, err);
             twilio.sendMessage(req.body.phone, 'Welcome ' + req.body.name + ' to the ' + lineup.title + ' line-up.', function (err, msg) {
-              if (err) return;
-              Lineupuser.count({
-                lineup: lineup._id,
-                timeJoin: { $lte: lineupuser.timeJoin },
-                timeLeave: null
-              }, function (err, count) {
-                if (err) return;
+              if (err) return console.log(err);
+              lineupuser.userPosition(function (err, pos) {
+                if (err) return console.log(err);
                 lineup.averageWait(function (err, wait) {
-                  if (err) return;
-                  twilio.sendMessage(req.body.phone, 'You are ' + numberString(count) + ' in line. Est. wait time is ' + Math.round(wait * count / 1000 / 60) + 'min. Live status @ http://t.co/1337');
+                  if (err) return console.log(err);
+                  twilio.sendMessage(req.body.phone, 'You are ' + numberString(pos) + ' in line. Est. wait time is ' + Math.round(pos * wait / 1000 / 60) + 'min. Live status @ http://t.co/1337');
                 });
               });
             });
@@ -162,23 +153,19 @@ exports.enqueue = function (req, res) {
       }
     } else {
       req.body.user = req.user._id;
-      Lineupuser.find({ lineup: lineup._id, user: req.user._id, timeLeave: null }, function (err, lineupuser) {
+      Lineupuser.find({ lineup: lineup._id, user: req.user._id, timeLeft: null }, function (err, lineupuser) {
         if (err) return handleError(res, err);
         if (!lineupuser) {
           Lineupuser.create(req.body, function (err, lineupuser) {
             if (err) return handleError(res, err);
             if (req.user.phone) {
               twilio.sendMessage(req.user.phone, 'Welcome ' + req.user.name + ' to the ' + lineup.title + ' line-up.', function (err, msg) {
-                if (err) return;
-                Lineupuser.count({
-                  lineup: lineup._id,
-                  timeJoin: { $lte: lineupuser.timeJoin },
-                  timeLeave: null
-                }, function (err, count) {
-                  if (err) return;
+                if (err) return console.log(err);
+                lineupuser.userPosition(function (err, pos) {
+                  if (err) return console.log(err);
                   lineup.averageWait(function (err, wait) {
-                    if (err) return;
-                    twilio.sendMessage(req.user.phone, 'You are ' + numberString(count) + ' in line. Est. wait time is ' + Math.round(wait * count / 1000 / 60) + 'min. Live status @ http://t.co/1337');
+                    if (err) return console.log(err);
+                    twilio.sendMessage(req.user.phone, 'You are ' + numberString(pos) + ' in line. Est. wait time is ' + Math.round(pos * wait / 1000 / 60) + 'min. Live status @ http://t.co/1337');
                   });
                 });
               });

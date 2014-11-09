@@ -20,7 +20,7 @@ var LineupSchema = new Schema({
 });
 
 LineupSchema.methods.userCount = function (cb) {
-  this.model('Lineupuser').count({ lineup: this._id, timeLeave: null }, cb);
+  this.model('Lineupuser').count({ lineup: this._id, timeLeft: null }, cb);
 };
 
 LineupSchema.methods.noshowCount = function (cb) {
@@ -28,13 +28,13 @@ LineupSchema.methods.noshowCount = function (cb) {
 }
 
 LineupSchema.methods.averageWait = function (cb) {
-  this.model('Lineupuser').find({ lineup: this._id, timeLeave: { $gt: 0 } }, function (err, lineupusers) {
+  this.model('Lineupuser').find({ lineup: this._id, timeLeft: { $gt: 0 } }, function (err, lineupusers) {
     if (err) return cb(err, lineupusers);
     var n = 0;
     lineupusers.forEach(function (lineupuser) {
-      n += lineupuser.timeJoin - lineupuser.timeLeave;
+      n += lineupuser.timeJoin - lineupuser.timeLeft;
     });
-    cb(err, Math.round(n / lineupusers.length));
+    cb(err, n / lineupusers.length);
   });
 };
 
@@ -49,7 +49,7 @@ LineupSchema.methods.lineupStats = function (cb) {
       stats.noshow = noshow;
       self.averageWait(function (err, wait) {
         if (err) return cb(err, stats);
-        stats.wait = Math.round(wait / 1000 / 60);
+        stats.wait = wait;
         return cb(err, stats);
       });
     });
