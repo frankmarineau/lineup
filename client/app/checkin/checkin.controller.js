@@ -11,36 +11,20 @@ angular.module('lineupApp')
 
     refreshGuestList();
 
-    $scope.AddGuest = function(form)
+    $scope.addGuest = function(form)
     {
-    	$scope.submitted = true;
-
-      if(form.$valid) {
-        Auth.login({
-          firstName: $scope.firstName,
-          lastName: $scope.lastName,
-          phoneNumber: $scope.phoneNumber
-        })
-        .then( function(guest) {
-          $scope.checkin.guests.push(guest);
-        })
-        .catch( function(err) {
-          $scope.errors = err.message;
-        });
-      }
+    	// TO DO: implement the add
+    	$scope.checkin.guests.push(guest);
     };
 
-    $scope.login = function(form) {
-      
-    };
+    $scope.checkout = function(index){
+    	// TODO Checkout call
 
-    $scope.Checkout = function(index){
-    	// ajax call for Checkout
     	$scope.checkin.guests.splice(index, 1);
     };
 
-    $scope.DeleteGuest = function(index){
-    	// ajax call for delete
+    $scope.deleteGuest = function(index){
+    	// TO DO: delete call
     	$scope.checkin.guests.splice(index, 1);
     };
 
