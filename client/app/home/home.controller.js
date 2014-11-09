@@ -14,7 +14,7 @@ angular.module('lineupApp')
 
     $('#next').on('click', function() {
         $('html, body').animate({
-          scrollTop: $('#what').offset().top - 60
+          scrollTop: $('#what').offset().top
         }, 1000);
     });
   });
