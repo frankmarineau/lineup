@@ -1,10 +1,22 @@
 'use strict';
 
 angular.module('lineupApp')
-  .controller('ClientlineupdetailsCtrl', function ($scope, Auth, Lineup) {
-    Lineup.query({}, function(lineups) {
-        $scope.lineup = lineups[0] || [];
-        $scope.isInQueue = lineups.length > 0;
+  .controller('ClientlineupdetailsCtrl', function ($scope, Auth, Lineup, $interval) {
+
+    var refreshLineups = function() {
+        Lineup.query({}, function(lineups) {
+            $scope.lineup = lineups[0] || [];
+            $scope.isInQueue = lineups.length > 0;
+        });
+    };
+
+    refreshLineups();
+    var intervalPromise = $interval(refreshLineups, 3000);
+
+    $scope.$on('$destroy', function() {
+        if (intervalPromise) {
+            $interval.cancel(intervalPromise);
+        }
     });
 
     var user = Auth.getCurrentUser();

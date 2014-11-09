@@ -17,7 +17,7 @@ angular.module('lineupApp')
         isArray: false
       },
       checkout: {
-        url: '/api/lineupusers/:id?noshow=0',
+        url: '/api/lineupusers/:id',
         method: 'DELETE'
       },
       noshow: {

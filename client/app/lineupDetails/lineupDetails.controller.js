@@ -36,8 +36,13 @@ angular.module('lineupApp')
       ]
     };
 
+    $scope.getRandomAge = function() {
+      return [19,21,'-',23,19,23,'-',29,22,'-',26,19,'-'][Math.floor(Math.random()*12)];
+    };
+
     $scope.getTimeInterval = function(timeJoined, timeLeft) {
-      return Math.floor((new Date(timeLeft).getTime() - new Date(timeJoined).getTime()) / 60 / 1000);
+      if (!timeLeft || !timeJoined) return "-";
+      return Math.floor((new Date(timeLeft).getTime() - new Date(timeJoined).getTime()) / 60 / 1000) + " min";
     };
 
     $scope.chartOptions = {
