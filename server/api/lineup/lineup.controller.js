@@ -107,14 +107,16 @@ exports.enqueue = function (req, res) {
           Lineupuser.create(req.body, function (err, lineupuser) {
             if (err) return handleError(res, err);
             if (user.phone) {
-              twilio.sendMessage(req.body.phone, 'Welcome ' + user.name + ' to the ' + lineup.name + ' line-up.');
-              Lineupuser.count({
-                lineup: lineup._id,
-                timeJoin: { $lte: lineupuser.timeJoin },
-                timeLeave: null
-              }, function (err, count) {
+              twilio.sendMessage(req.body.phone, 'Welcome ' + user.name + ' to the ' + lineup.title + ' line-up.', function (err, msg) {
                 if (err) return;
-                twilio.sendMessage(user.phone, 'You are currently ' + numberString(count) + ' in line. Live status @ http://t.co/1337');
+                Lineupuser.count({
+                  lineup: lineup._id,
+                  timeJoin: { $lte: lineupuser.timeJoin },
+                  timeLeave: null
+                }, function (err, count) {
+                  if (err) return;
+                  twilio.sendMessage(user.phone, 'You are currently ' + numberString(count) + ' in line. Live status @ http://t.co/1337');
+                });
               });
             }
             return res.json(201, lineupuser);
@@ -126,14 +128,16 @@ exports.enqueue = function (req, res) {
           if (user) req.body.user = user._id;
           Lineupuser.create(req.body, function (err, lineupuser) {
             if (err) return handleError(res, err);
-            twilio.sendMessage(req.body.phone, 'Welcome ' + req.body.name + ' to the ' + lineup.name + ' line-up.');
-            Lineupuser.count({
-              lineup: lineup._id,
-              timeJoin: { $lte: lineupuser.timeJoin },
-              timeLeave: null
-            }, function (err, count) {
+            twilio.sendMessage(req.body.phone, 'Welcome ' + req.body.name + ' to the ' + lineup.title + ' line-up.', function (err, msg) {
               if (err) return;
-              twilio.sendMessage(req.body.phone, 'You are currently ' + numberString(count) + ' in line. Live status @ http://t.co/1337');
+              Lineupuser.count({
+                lineup: lineup._id,
+                timeJoin: { $lte: lineupuser.timeJoin },
+                timeLeave: null
+              }, function (err, count) {
+                if (err) return;
+                twilio.sendMessage(req.body.phone, 'You are currently ' + numberString(count) + ' in line. Live status @ http://t.co/1337');
+              });
             });
             return res.json(201, lineupuser);
           });
@@ -152,14 +156,16 @@ exports.enqueue = function (req, res) {
           Lineupuser.create(req.body, function (err, lineupuser) {
             if (err) return handleError(res, err);
             if (req.user.phone) {
-              twilio.sendMessage(req.user.phone, 'Welcome ' + req.user.name + ' to the ' + lineup.name + ' line-up.');
-              Lineupuser.count({
-                lineup: lineup._id,
-                timeJoin: { $lte: lineupuser.timeJoin },
-                timeLeave: null
-              }, function (err, count) {
+              twilio.sendMessage(req.user.phone, 'Welcome ' + req.user.name + ' to the ' + lineup.title + ' line-up.', function (err, msg) {
                 if (err) return;
-                twilio.sendMessage(req.user.phone, 'You are currently ' + numberString(count) + ' in line.');
+                Lineupuser.count({
+                  lineup: lineup._id,
+                  timeJoin: { $lte: lineupuser.timeJoin },
+                  timeLeave: null
+                }, function (err, count) {
+                  if (err) return;
+                  twilio.sendMessage(req.user.phone, 'You are currently ' + numberString(count) + ' in line.');
+                });
               });
             }
             return res.json(201, lineupuser);
