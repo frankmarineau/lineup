@@ -11,12 +11,12 @@ var LineupSchema = new Schema({
   welcomeMessage: String,
   maxInQueue: { type: Number, default: 0 },
   opening: {
-    hour: Number,
-    minute: Number
+    hour: { type: Number, default: 8 },
+    minute: { type: Number, default: 0 }
   },
   closing: {
-    hour: Number,
-    minute: Number
+    hour: { type: Number, default: 17 },
+    minute: { type: Number, default: 0 }
   },
   active: { type: Boolean, default: true }
 });

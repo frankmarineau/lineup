@@ -57,3 +57,6 @@ body {
 .analytics-date-range {
     float: left;
 }
+.lineup-list-container .add-lineup {
+  max-width: 300px;
+}

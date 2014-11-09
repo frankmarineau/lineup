@@ -7,7 +7,7 @@ angular.module('lineupApp')
       id: '@id'
     }, {
       update: {
-        method: 'POST'
+        method:'PUT'
       },
       get: {
         method: 'GET',
