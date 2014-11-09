@@ -34,7 +34,11 @@ exports.show = function (req, res) {
       Lineupuser.find({ lineup: lineup._id }).populate('user').exec(function (err, lineupusers) {
         if (err) return handleError(res, err);
         lineup.clients = lineupusers;
-        return res.json(200, lineup);
+        lineup.averageWait(function (err, wait) {
+          if (err) return handleError(res, err);
+          lineup.wait = wait;
+          return res.json(200, lineup);
+        });
       });
     } else {
       return res.json(200, lineup);
@@ -79,7 +83,7 @@ exports.update = function (req, res) {
 
 exports.destroy = function (req, res) {
   if (req.user.hasRole('admin')) {
-    Lineup.findById(req.params.id, function (err, lineup) {
+    Lineup.find({ _id: req.params.id, owner: req.user._id }, function (err, lineup) {
       if (err) return handleError(res, err);
       if (!lineup) return res.send(404);
       lineup.remove(function (err) {
@@ -115,7 +119,10 @@ exports.enqueue = function (req, res) {
                   timeLeave: null
                 }, function (err, count) {
                   if (err) return;
-                  twilio.sendMessage(user.phone, 'You are currently ' + numberString(count) + ' in line. Live status @ http://t.co/1337');
+                  lineup.averageWait(function (err, wait) {
+                    if (err) return;
+                    twilio.sendMessage(user.phone, 'You are ' + numberString(count) + ' in line. Est. wait time is ' + Math.round(wait * count / 1000 / 60) + 'min. Live status @ http://t.co/1337');
+                  });
                 });
               });
             }
@@ -136,7 +143,10 @@ exports.enqueue = function (req, res) {
                 timeLeave: null
               }, function (err, count) {
                 if (err) return;
-                twilio.sendMessage(req.body.phone, 'You are currently ' + numberString(count) + ' in line. Live status @ http://t.co/1337');
+                lineup.averageWait(function (err, wait) {
+                  if (err) return;
+                  twilio.sendMessage(req.body.phone, 'You are ' + numberString(count) + ' in line. Est. wait time is ' + Math.round(wait * count / 1000 / 60) + 'min. Live status @ http://t.co/1337');
+                });
               });
             });
             return res.json(201, lineupuser);
@@ -164,7 +174,10 @@ exports.enqueue = function (req, res) {
                   timeLeave: null
                 }, function (err, count) {
                   if (err) return;
-                  twilio.sendMessage(req.user.phone, 'You are currently ' + numberString(count) + ' in line.');
+                  lineup.averageWait(function (err, wait) {
+                    if (err) return;
+                    twilio.sendMessage(req.user.phone, 'You are ' + numberString(count) + ' in line. Est. wait time is ' + Math.round(wait * count / 1000 / 60) + 'min. Live status @ http://t.co/1337');
+                  });
                 });
               });
             }

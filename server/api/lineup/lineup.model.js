@@ -19,4 +19,15 @@ var LineupSchema = new Schema({
   active: { type: Boolean, default: true }
 });
 
+LineupSchema.methods.averageWait = function (cb) {
+  this.model('Lineupuser').find({ lineup: this._id, timeLeave: { $gt: 0 } }, function (err, lineupusers) {
+    if (err) return cb(err, lineupusers);
+    var n = 0;
+    lineupusers.forEach(function (lineupuser) {
+      n += lineupuser.timeJoin - lineupuser.timeLeave;
+    });
+    cb(err, n / lineupusers.length);
+  });
+};
+
 module.exports = mongoose.model('Lineup', LineupSchema);
