@@ -15,8 +15,12 @@ exports.destroy = function (req, res) {
         if (err) return handleError(res, err);
         Lineupuser.find({ lineup: lineupuser.lineup, timeLeft: null }).populate('user').exec(function (err, lineupusers) {
           if (err) return;
-          if (lineupusers.length >= 3 && lineupusers[2].user && lineupusers[2].user.phone) {
-            twilio.sendMessage(lineupusers[2].user.phone, 'You are now 3rd in line! Time to show up!');
+          if (lineupusers.length >= 3) {
+            if (lineupusers[2].user && lineupusers[2].user.phone) {
+              twilio.sendMessage(lineupusers[2].user.phone, 'You are now 3rd in line! Time to show up!');
+            } else if (lineupusers[2].phone) {
+              twilio.sendMessage(lineupusers[2].phone, 'Your are now 3rd line! Time to show up!');
+            }
           }
         });
         return res.json(200, lineupuser);

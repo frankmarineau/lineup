@@ -19,15 +19,15 @@ LineupuserSchema.methods.userCount = function (cb) {
 };
 
 LineupuserSchema.methods.userPosition = function (cb) {
-  this.model('Lineupuser').count({ lineup: this.lineup, timeJoined: { $lt: this.timeJoined }, timeLeft: null }, cb);
+  this.model('Lineupuser').count({ lineup: this.lineup, timeJoined: { $lte: this.timeJoined }, timeLeft: null }, cb);
 };
 
 LineupuserSchema.methods.averageWait = function (cb) {
-  this.model('Lineupuser').find({ lineup: this.lineup, timeLeft: { $gt: 0 } }, function (err, lineupusers) {
+  this.model('Lineupuser').find({ lineup: this.lineup, timeLeft: { $exists: true } }, function (err, lineupusers) {
     if (err) return cb(err, lineupusers);
     var n = 0;
     lineupusers.forEach(function (lineupuser) {
-      n += lineupuser.timeJoined - lineupuser.timeLeft;
+      n += lineupuser.timeLeft - lineupuser.timeJoined;
     });
     cb(err, n / lineupusers.length);
   });
