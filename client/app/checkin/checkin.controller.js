@@ -12,6 +12,8 @@ angular.module('lineupApp')
             phone: $scope.user.phone
         }, function(newGuest) {
             $scope.lineup.users.push(newGuest);
+            $scope.user.name = "";
+            $scope.user.phone = "";
         });
     };
 
