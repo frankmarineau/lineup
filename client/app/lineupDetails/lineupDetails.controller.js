@@ -1,7 +1,12 @@
 'use strict';
 
 angular.module('lineupApp')
-  .controller('LineupdetailsCtrl', function ($scope, Lineup, $routeParams, $http) {
+  .controller('LineupdetailsCtrl', function ($scope, Lineup, $routeParams, $http, Auth, $location) {
+    console.log(Auth.getCurrentUser());
+    if (Auth.getCurrentUser().role === "clerk") {
+      $location.path('/checkin/' + $routeParams.id);
+    }
+
     $scope.lineup = Lineup.get({id: $routeParams.id});
 
     $scope.achalandageChart = {
