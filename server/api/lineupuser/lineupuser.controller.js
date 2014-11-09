@@ -10,7 +10,7 @@ exports.destroy = function (req, res) {
       if (err) return handleError(res, err);
       if (!lineupuser) return res.send(404);
       lineupuser.timeLeft = Date.now();
-      lineupuser.noShow = !!req.query.noshow;
+      lineupuser.noShow = !!req.query.noshow && req.query.noshow !== '0';
       lineupuser.save(function (err, lineupuser) {
         if (err) return handleError(res, err);
         if (lineupuser.noShow) {
