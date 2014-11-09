@@ -61,6 +61,7 @@
   left: 50%;
   cursor: pointer;
   color: #8CE200;
+  opacity: 0.75;
 }
 
 .data-section {
