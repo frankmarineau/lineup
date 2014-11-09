@@ -11,7 +11,6 @@ exports.destroy = function (req, res) {
       if (!lineupuser) return res.send(404);
       lineupuser.timeLeft = Date.now();
       lineupuser.noShow = !!req.query.noshow;
-      console.log(req.query);
       lineupuser.save(function (err, lineupuser) {
         if (err) return handleError(res, err);
         if (lineupuser.noShow) {
