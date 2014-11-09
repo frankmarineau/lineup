@@ -48,6 +48,7 @@ module.exports = function(app) {
     app.use(morgan('dev'));
   }
 
+  console.log(env);
   if ('development' === env || 'test' === env) {
     console.log(path.join(config.root, 'client'));
     app.use(require('connect-livereload')());
