@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lineupApp')
-  .controller('LineupdetailsCtrl', function ($scope, Lineup, $routeParams) {
+  .controller('LineupdetailsCtrl', function ($scope, Lineup, $routeParams, $http) {
     $scope.lineup = Lineup.query($routeParams.id);
 
     $scope.achalandageChart = {
@@ -26,5 +26,19 @@ angular.module('lineupApp')
 
     $scope.chartOptions = {
       scaleStartValue: 0
+    };
+
+    $scope.updateSettings = function() {
+      $http.post('/users/settings', {
+        title: $scope.title,
+        maxInQueue: $scope.maxInQueue,
+        openingHour: $scope.openingHour,
+        closingHour: $scope.closingHour,
+        welcomeMessage: $scope.welcomeMessage
+      }).success(function(data) {
+
+      }).error(function(data, status, headers, config) {
+        console.log("error POSTing settings")
+      });
     };
   });

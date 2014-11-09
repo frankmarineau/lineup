@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
+var config = require('../../config/environment');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new Schema({
@@ -10,6 +11,7 @@ var UserSchema = new Schema({
   email: { type: String, lowercase: true },
   phone: String,
   role: { type: String, default: 'guest' },
+  manager: { type: Schema.Types.ObjectId, ref: 'User' },
   hashedPassword: String,
   provider: String,
   salt: String,
@@ -143,16 +145,9 @@ UserSchema.methods = {
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
   },
 
-  findLineups: function (cb) {
-    this.model('Lineupclient').find({ user: this._id }).populate('lineup').exec(function (err, linenupclients) {
-      if (err) return cb(err);
 
-      var lineups = [];
-      linenupclients.forEach(function (lineupclient) {
-        lineups.push(lineupclient.lineup);
-      });
-      cb(err, lineups);
-    });
+  hasRole: function (roleRequired) {
+    return config.userRoles.indexOf(this.role) >= config.userRoles.indexOf(roleRequired);
   }
 };
 

@@ -5,6 +5,7 @@ angular.module('lineupApp')
     $routeProvider
       .when('/guests/:id', {
         templateUrl: 'app/clientLineupDetails/clientLineupDetails.html',
-        controller: 'ClientlineupdetailsCtrl'
+        controller: 'ClientlineupdetailsCtrl',
+        authenticate: true
       });
   });

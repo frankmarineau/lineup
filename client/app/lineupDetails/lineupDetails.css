@@ -1,0 +1,16 @@
+#analytics-timescale {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 1;
+}
+
+#analytics-section {
+  position: relative;
+}
+
+#analytics-timerange {
+  position: absolute;
+  right: 220px;
+  top: 20px;
+}

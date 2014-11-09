@@ -10,12 +10,12 @@ module.exports = function(app) {
 
   // Insert routes below
   app.use('/api/fields', require('./api/field'));
-  app.use('/api/enterprises', require('./api/enterprise'));
-  app.use('/api/lineupclients', require('./api/lineupclient'));
   app.use('/api/lineups', require('./api/lineup'));
+  app.use('/api/lineupusers', require('./api/lineupuser'));
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth'));
+  app.use('/twilio', require('./twilio'));
 
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
