@@ -76,14 +76,15 @@
 }
 
 .what {
+  height: 450px;
 }
 .what .row {
-  padding-top: 75px;
+  padding-top: 90px;
   font-size: 1.5em;
 }
 .mission {
   background-color: #EAEEF2;
-  height: 500px;
+  height: 425px;
 }
 .mission p {
   font-size: 2em;
