@@ -24,9 +24,11 @@ body {
     border-radius: 5px;
     border: 0;
     padding: 25px;
+    transition: all 0.2s ease-in-out;
 }
 .lineup-list-container .lineup-element:hover {
-    background-color: #F0F0F0;
+    background-color: #FFF;
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.3);
 }
 
 .stat-container {
