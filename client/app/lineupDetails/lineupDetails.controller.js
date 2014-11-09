@@ -30,7 +30,11 @@ angular.module('lineupApp')
 
     $scope.updateSettings = function() {
       $http.post('/users/settings', {
-
+        title: $scope.title,
+        maxInQueue: $scope.maxInQueue,
+        openingHour: $scope.openingHour,
+        closingHour: $scope.closingHour,
+        welcomeMessage: $scope.welcomeMessage
       }).success(function(data) {
 
       }).error(function(data, status, headers, config) {
