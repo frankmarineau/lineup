@@ -53,7 +53,7 @@
               <td>{{ user.user.facebook.gender || '-' }}</td>
               <td>{{ user.user.facebook.age || '-' }}</td>
               <td>{{ user.user.email || '-' }}</td>
-              <td>{{ '-' }}</td>
+              <td>{{ getTimeInterval(user.timeJoined, user.timeLeft) }} mins</td>
             </tr>
           </tbody>
         </table>
