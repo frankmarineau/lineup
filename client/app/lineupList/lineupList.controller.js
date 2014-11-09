@@ -5,7 +5,7 @@ angular.module('lineupApp')
 
     $scope.isAdmin = function() {
         return Auth.isAdmin();
-    }
+    };
 
     var refreshLineups = function() {
         Lineup.query({}, function(lineups) {
@@ -23,8 +23,7 @@ angular.module('lineupApp')
     });
 
     $scope.addLineup = function() {
-        if ($scope.title.trim().length === 0)
-            return;
+        if ($scope.title.trim().length === 0) return;
 
         Lineup.save({
             title: $scope.title
@@ -32,5 +31,9 @@ angular.module('lineupApp')
             $scope.lineups.push(newLineup);
             $scope.title = "";
         });
+    };
+
+    $scope.lineupHref = function(id) {
+        return (Auth.isAdmin() ? '/lineups'  : '/checkins') + "/" + id;
     };
   });
