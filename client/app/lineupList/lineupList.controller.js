@@ -1,27 +1,27 @@
 'use strict';
 
 angular.module('lineupApp')
-  .controller('LineuplistCtrl', function ($scope, Lineup) {
+  .controller('LineuplistCtrl', function ($scope, Lineup, $location, $interval) {
     var refreshLineups = function() {
-        $scope.lineups = Lineup.query();
+        Lineup.query({}, function(lineups) {
+            $scope.lineups = lineups;
+        });
     };
-    refreshLineups();
-    //setInterval(refreshLineups, 10000);
 
-    if ($scope.lineups.length == 1) {
-        //TODO redirect on it
-    }
+    refreshLineups();
+    var intervalPromise = $interval(refreshLineups, 3000);
+
+    $scope.$on('$destroy',function(){
+        if(intervalPromise) {
+            $interval.cancel(intervalPromise);
+        }
+    });
 
     $scope.addLineup = function() {
-        $scope.lineups.push({
-            title: $scope.title,
-            guests: []
-        });
-
         Lineup.save({
             title: $scope.title
-        }, function(data) {
-            $scope.title = "";
+        }, function(newLineup) {
+            $scope.lineups.push(newLineup);
         });
     };
   });

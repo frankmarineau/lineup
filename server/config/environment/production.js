@@ -20,7 +20,7 @@ var prod = {
             process.env.OPENSHIFT_MONGODB_DB_URL+process.env.OPENSHIFT_APP_NAME ||
             'mongodb://localhost/lineup'
   },
-  domain: "http://lineup.willisite.com"
+  domain: "http://beinline.co"
 };
 
 prod.facebook.callbackURL = prod.domain;
