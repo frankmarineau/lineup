@@ -1,12 +1,12 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="col-md-6 col-md-offset-3">
-    <h1 class="page-header">Your Lineups</h1>
+<div class="col-md-6 col-md-offset-3 lineup-list-container">
+    <h1>Your Lineups</h1>
     <div class="list-group">
       <a href="/lineups/{{lineup._id}}" class="list-group-item lineup-element" ng-repeat="lineup in lineups">
         <h3 class="list-group-item-heading">
-            {{lineup.title}}
-            <small>
+            {{ lineup.title }}
+            <small class="pull-right lineup-current-people">
                 <span ng-switch="lineup.guests.length">
                     <span ng-switch-when="0">No one</span>
                     <span ng-switch-when="1">1 person</span>
@@ -15,6 +15,7 @@
                 currently in line
             </small>
         </h3>
+        <hr>
         <div class="row">
             <div class="col-md-4 stat-container">
                 <h2>{{ (lineup.stats.averageWaitTime ? lineup.stats.averageWaitTime + " min" : "-") }}</h2>
