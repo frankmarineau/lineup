@@ -71,3 +71,7 @@ body {
 .navbar-inverse .navbar-nav > li > a {
   padding-top:20px;
 }
+.navbar-inverse .navbar-text {
+  padding-top:20px;
+  margin: 0 15px 0 15px;
+}
