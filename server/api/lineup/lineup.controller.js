@@ -14,7 +14,7 @@ exports.index = function (req, res) {
       async.map(lineups, function (lineup, callback) {
         lineup.lineupStats(function (err, stats) {
           if (err) return handleError(res, err);
-          stats.wait = Math.round(stats.wait / 1000 / 60)
+          stats.wait = Math.round(stats.wait / 1000 / 60);
           lineup = lineup.toObject();
           lineup.stats = stats;
           callback(err, lineup);
@@ -30,7 +30,7 @@ exports.index = function (req, res) {
       async.map(lineups, function (lineup, callback) {
         lineup.lineupStats(function (err, stats) {
           if (err) return handleError(res, err);
-          stats.wait = Math.round(stats.wait / 1000 / 60)
+          stats.wait = Math.round(stats.wait / 1000 / 60);
           lineup = lineup.toObject();
           lineup.stats = stats;
           callback(err, lineup);
@@ -47,7 +47,7 @@ exports.index = function (req, res) {
         lineupuser.userStats(function (err, stats) {
           if (err) return handleError(res, err);
           lineupuser = lineupuser.toObject();
-          stats.wait = Math.round(stats.wait / 1000 / 60)
+          stats.wait = Math.round(stats.wait / 1000 / 60);
           lineupuser.stats = stats;
           callback(err, lineupuser);
         });
@@ -64,12 +64,24 @@ exports.show = function (req, res) {
     if (err) return handleError(res, err);
     if (!lineup) return res.send(404);
 
-    if (req.user.hasRole('clerk')) {
+    if (req.user.hasRole('admin')) {
+      Lineupuser.find({ lineup: lineup._id }).populate('user').exec(function (err, lineupusers) {
+        if (err) return handleError(res, err);
+        lineup.lineupStats(function (err, stats) {
+          if (err) return handleError(res, err);
+          stats.wait = Math.round(stats.wait / 1000 / 60);
+          lineup = lineup.toObject();
+          lineup.users = lineupusers;
+          lineup.stats = stats;
+          return res.json(200, lineup);
+        });
+      });
+    } else if (req.user.hasRole('clerk')) {
       Lineupuser.find({ lineup: lineup._id, timeLeft: null }).populate('user').exec(function (err, lineupusers) {
         if (err) return handleError(res, err);
         lineup.lineupStats(function (err, stats) {
           if (err) return handleError(res, err);
-          stats.wait = Math.round(stats.wait / 1000 / 60)
+          stats.wait = Math.round(stats.wait / 1000 / 60);
           lineup = lineup.toObject();
           lineup.users = lineupusers;
           lineup.stats = stats;
@@ -81,7 +93,7 @@ exports.show = function (req, res) {
         if (err) return handleError(res, err);
         lineupuser.userStats(function (err, stats) {
           if (err) return handleError(res, err);
-          stats.wait = Math.round(stats.wait / 1000 / 60)
+          stats.wait = Math.round(stats.wait / 1000 / 60);
           lineupuser = lineupuser.toObject();
           lineupuser.lineup = lineup;
           lineupuser.stats = stats;
@@ -215,7 +227,6 @@ function handleError(res, err) {
 }
 
 function numberString(n) {
-  if (isNaN(n)) return '?';
   var m = n % 10;
   var s = 'th';
   if (m === 1) s = 'st';
@@ -232,11 +243,17 @@ function sendMessages(user, lineup, lineupuser, cb) {
       lineupuser.averageWait(function (err, wait) {
         if (err) return cb(err);
         twilio.shorten('http://beinline.co/guests/' + lineupuser._id, function (err, shorturl) {
-          if (err) return cb(err);
-          twilio.sendMessage(user.phone, 'You are ' + numberString(pos) + ' in line. Est. wait time is ' + Math.round(pos * wait / 1000 / 60) + 'min. Live status @ ' + shorturl, function (err, msg) {
-            if (err) return cb(err);
-            return cb(null, true);
-          });
+          if (isNaN(wait)) {
+            twilio.sendMessage(user.phone, 'You are ' + numberString(pos) + ' in line. Live status @ ' + shorturl, function (err, msg) {
+              if (err) return cb(err);
+              return cb(null, true);
+            });
+          } else {
+            twilio.sendMessage(user.phone, 'You are ' + numberString(pos) + ' in line. Estimated wait time is ' + Math.round(pos * wait / 1000 / 60) + 'min. Live status @ ' + shorturl, function (err, msg) {
+              if (err) return cb(err);
+              return cb(null, true);
+            });
+          }
         });
       });
     });
