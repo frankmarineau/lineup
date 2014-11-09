@@ -9,6 +9,9 @@ angular.module('lineupApp')
       update: {
         method:'PUT'
       },
+      create: {
+        method:'POST'
+      },
       get: {
         method: 'GET',
         isArray: false

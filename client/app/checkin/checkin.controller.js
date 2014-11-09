@@ -5,7 +5,7 @@ angular.module('lineupApp')
     $scope.lineup = Lineup.get({id: $routeParams.id});
 
     $scope.addGuest = function() {
-        Lineup.update({
+        Lineup.create({
             id: $scope.lineup._id
         }, {
             name: $scope.user.name,
@@ -18,7 +18,6 @@ angular.module('lineupApp')
     };
 
     $scope.checkout = function(index) {
-        console
         Lineup.checkout({
             id: $scope.lineup.users[index]._id
         }, function(newGuest) {
