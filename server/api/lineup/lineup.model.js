@@ -28,11 +28,11 @@ LineupSchema.methods.noshowCount = function (cb) {
 }
 
 LineupSchema.methods.averageWait = function (cb) {
-  this.model('Lineupuser').find({ lineup: this._id, timeLeft: { $gt: 0 } }, function (err, lineupusers) {
+  this.model('Lineupuser').find({ lineup: this._id, timeLeft: { $exists: true } }, function (err, lineupusers) {
     if (err) return cb(err, lineupusers);
     var n = 0;
     lineupusers.forEach(function (lineupuser) {
-      n += lineupuser.timeJoin - lineupuser.timeLeft;
+      n += lineupuser.timeLeft - lineupuser.timeJoined;
     });
     cb(err, n / lineupusers.length);
   });
