@@ -29,6 +29,11 @@
 
 #save-button {
     margin-top: 20px;
+    float: left;
+}
+#delete-button {
+    margin-top: 20px;
+    float: right;   
 }
 
 .settings-container label {

@@ -1,38 +1,37 @@
 'use strict';
 
 angular.module('lineupApp')
-  .controller('CheckinCtrl', function ($scope, Checkin, Lineup, $routeParams) {
-    $scope.message = 'Hello';
-
+  .controller('CheckinCtrl', function ($scope, Lineup, $routeParams) {
     $scope.lineup = Lineup.get({id: $routeParams.id});
 
-    var refreshGuestList = function(){
-    	$scope.checkin = Checkin.query();
-    }
-
-    refreshGuestList();
-
-    $scope.addGuest = function()
-    {
+    $scope.addGuest = function() {
         Lineup.update({
             id: $scope.lineup._id
         }, {
             name: $scope.user.name,
             phone: $scope.user.phone
+        }, function(newGuest) {
+            $scope.lineup.users.push(newGuest);
+            $scope.user.name = "";
+            $scope.user.phone = "";
         });
-
-    	$scope.checkin.guests.push(guest);
     };
 
-    $scope.checkout = function(index){
-    	// TODO Checkout call
-
-    	$scope.checkin.guests.splice(index, 1);
+    $scope.checkout = function(index) {
+        console
+        Lineup.checkout({
+            id: $scope.lineup.users[index]._id
+        }, function(newGuest) {
+            $scope.lineup.users.splice(index, 1);
+        });
     };
 
     $scope.deleteGuest = function(index){
-    	// TO DO: delete call
-    	$scope.checkin.guests.splice(index, 1);
+        Lineup.noshow({
+            id: $scope.lineup.users[index]._id
+        }, function(newGuest) {
+            $scope.lineup.users.splice(index, 1);
+        });
     };
 
   });
