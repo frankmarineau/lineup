@@ -1,25 +1,93 @@
+.login-panel .container {
+  height: 100%;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+.login-content {
+  width:100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 13%;
+}
+.login-inside {
+  border-radius: 10px;
+  background-color: white;
+  margin: auto;
+  width: 600px;
+  padding: 50px 50px 50px;
+}
+.login-inside h1 {
+  font-size: 4.5em;
+  line-height: 1;
+  letter-spacing: -1px;
+  text-align: center;
+  margin: 0 0 20px;
+}
+.login-inside h2 {
+  font-size: 2.5em;
+  line-height: 1;
+  letter-spacing: -1px;
+  text-align: center;
+  margin: 15px 0 35px;
+  color: #4a4a4a;
+}
+.login-inside .btn-login {
+  width: 100%;
+}
+.login-inside .or {
+  position: relative;
+  top: -17px;
+  font-size: 1.5em;
+  background-color: white;
+  padding: 0 7px 0 7px;
+  color: #bbb;
+}
+.login-inside .btn-register {
+  width: 100%;
+}
+.login-inside .form-control {
+  height: 3em;
+}
+
 .btn-facebook {
   color: #fff;
   background-color: #3B5998;
   border-color: #133783;
+  height: 3em;
+  line-height: 2.25em;
+  font-size: 1.5em;
 }
 
 .btn-twitter {
   color: #fff;
   background-color: #2daddc;
   border-color: #0271bf;
+  height: 3em;
+  line-height: 2.25em;
+  font-size: 1.5em;
 }
 
 .btn-google-plus {
   color: #fff;
   background-color: #dd4b39;
   border-color: #c53727;
+  height: 3em;
+  line-height: 2.25em;
+  font-size: 1.5em;
+}
+.col-google-plus {
+  text-align: center;
 }
 
 .btn-github {
   color: #fff;
   background-color: #fafafa;
   border-color: #ccc;
+  height: 3em;
+  line-height: 2.25em;
+  font-size: 1.5em;
 }
 @media only screen and (max-device-width: 1200px) {
   .connect-with > div {
@@ -30,5 +98,8 @@
   }
   .connect-with a {
     width: 100%;
+  }
+  .login-content {
+    top: 15%;
   }
 }
