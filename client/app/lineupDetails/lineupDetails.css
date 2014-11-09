@@ -1,16 +1,32 @@
-#analytics-timescale {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  z-index: 1;
-}
-
 #analytics-section {
   position: relative;
 }
 
+.analytics-container {
+    background-color: #FFF;
+    padding: 30px;
+}
+
+.analytics-container h3 {
+    margin-bottom: 30px;
+}
+
+#analytics-timescale {
+    display: inline-block;
+}
+
 #analytics-timerange {
-  position: absolute;
-  right: 220px;
-  top: 20px;
+    display: inline-block;
+    margin-top: 2px;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+#analytics-timescale .btn:hover, #analytics-timescale .btn.active, #analytics-timescale .btn:focus {
+    background-color: #85D600;
+    color: white;
+}
+
+#analytics-timescale .btn {
+    box-shadow: none;
 }

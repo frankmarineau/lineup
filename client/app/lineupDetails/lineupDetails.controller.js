@@ -5,28 +5,87 @@ angular.module('lineupApp')
     $scope.lineup = Lineup.get($routeParams._id);
 
     $scope.achalandageChart = {
-      labels : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      labels : [],
       datasets : [
         {
-          fillColor : "#B7E2FB",
-          strokeColor : "#0f9ff1",
-          pointColor : "#0f9ff1",
-          pointStrokeColor : "#0f9ff1",
-          data : [9, 8, 10, 11, 14, 13, 15]
+          fillColor : "rgba(0,0,0,0)",
+          strokeColor : "#85D600",
+          pointColor : "#85D600",
+          pointStrokeColor : "#85D600",
+          data : []
         },
         {
-          fillColor : "#F8D9BD",
-          strokeColor : "#e67e22",
-          pointColor : "#e67e22",
-          pointStrokeColor : "#e67e22",
-          data : [4, 3, 2, 4, 4, 3, 2]
+          fillColor : "rgba(0,0,0,0)",
+          strokeColor : "#EE4C41;",
+          pointColor : "#EE4C41",
+          pointStrokeColor : "#EE4C41",
+          data : []
         }
       ]
     };
 
     $scope.chartOptions = {
-      scaleStartValue: 0
+      scaleStartValue: 0,
+      animationSteps : 30
     };
+
+    $scope.dateRange = 'week';
+
+    var dataShowUps = { day: [], week: [], month: [] };
+    var dataNoShows = { day: [], week: [], month: [] };
+    var labels = { day: [], week: [], month: [] };
+
+    var max = 5;
+    var min = 2;
+    var noShowsMax = 1;
+    for (var i = 0; i < 24; ++i) {
+      dataShowUps.day.push(Math.round(Math.random() * (max - min)) + min);
+      dataNoShows.day.push(Math.round(Math.random() * noShowsMax));
+      labels.day.push(i);
+    }
+
+    max = 23;
+    min = 14;
+    noShowsMax = 7;
+    for (var i = 0; i < 7; ++i) {
+      dataShowUps.week.push(Math.round(Math.random() * (max - min)) + min);
+      dataNoShows.week.push(Math.round(Math.random() * noShowsMax));
+    }
+    labels.week = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+
+    max = 23;
+    min = 14;
+    noShowsMax = 7;
+    for (var i = 0; i < 30; ++i) {
+      dataShowUps.month.push(Math.round(Math.random() * (max - min)) + min);
+      dataNoShows.month.push(Math.round(Math.random() * noShowsMax));
+      labels.month.push(i + 1);
+    }
+
+    var pickDateRange = function() {
+      var curDataShowUps;
+      var curDataNoShows;
+      var curLabels;
+      if ($scope.dateRange == 'day') {
+        curDataShowUps = dataShowUps.day;
+        curDataNoShows = dataNoShows.day;
+        curLabels = labels.day;
+      } else if ($scope.dateRange == 'week') {
+        curDataShowUps = dataShowUps.week;
+        curDataNoShows = dataNoShows.week;
+        curLabels = labels.week;
+      } else if ($scope.dateRange == 'month') {
+        curDataShowUps = dataShowUps.month;
+        curDataNoShows = dataNoShows.month;
+        curLabels = labels.month;
+      }
+      $scope.achalandageChart.labels = curLabels;
+      $scope.achalandageChart.datasets[0].data = curDataShowUps;
+      $scope.achalandageChart.datasets[1].data = curDataNoShows;
+    };
+
+    pickDateRange();
+    $scope.$watch('dateRange', pickDateRange);
 
     $scope.updateSettings = function() {
       $http.post('/users/settings', {
