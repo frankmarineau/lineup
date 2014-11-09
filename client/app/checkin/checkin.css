@@ -33,3 +33,12 @@ h2 {
   height:70px;
   font-size:30px;
 }
+
+@media only screen and (max-device-width: 768px) {
+  .pull-right {
+    float: none !important;
+  }
+  .buttons {
+    text-align: center;
+  }
+}

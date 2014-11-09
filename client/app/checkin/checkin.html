@@ -29,13 +29,13 @@
   <div class="list-group checkin-list">
   	<div class = "list-group-item" ng-repeat="guest in checkin.guests">
   		<div class="row" >
-			<div class="col-md-8 name">
+			<div class="col-md-8 col-sm-6 name">
 				<h3 class = "list-group-item-heading">
           {{checkin.fullName(guest)}}
 				</h3>
 			</div>
-			<div class="col-md-4 buttons">
-        <div class="btn-group pull-right ">
+			<div class="col-md-4 col-sm-6 buttons">
+        <div class="btn-group pull-right">
   				<button ng-click="DeleteGuest($index)" class="btn btn-danger btn-lg">&#10006;</button>
   				<button ng-click="Checkout($index)" class="btn btn-success btn-lg"><i class="fa fa-check"></i></button>
         </div>
