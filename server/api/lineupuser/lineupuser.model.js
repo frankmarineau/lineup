@@ -5,11 +5,9 @@ var mongoose = require('mongoose'),
 
 var LineupuserSchema = new Schema({
   lineup: { type: Schema.Types.ObjectId, ref: 'Lineup' },
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
   timeJoined: { type: Date, default: Date.now },
-  timeLeave: Date,
-  name: String,
-  phone: String,
-  user: { type: Schema.Types.ObjectId, ref: 'User' }
+  timeLeave: Date
 });
 
 module.exports = mongoose.model('Lineupuser', LineupuserSchema);

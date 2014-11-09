@@ -11,6 +11,7 @@ var UserSchema = new Schema({
   email: { type: String, lowercase: true },
   phone: String,
   role: { type: String, default: 'guest' },
+  manager: { type: Schema.Types.ObjectId, ref: 'User' },
   hashedPassword: String,
   provider: String,
   salt: String,
