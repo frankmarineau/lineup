@@ -38,9 +38,6 @@
     padding: 0.2em 0;
 }
 
-body {
-  padding-top: 60px;
-}
 .full-height {
   height: 100%;
 }
@@ -55,6 +52,13 @@ body {
   -webkit-box-shadow: 0 1px 1px 0 #000;
   box-shadow: 0, 1px, 1px, 0, #000;
 }
+.intro .navbar-inverse {
+  background-color: rgba(0,0,0,0);
+  min-height: 60px;
+  border-bottom: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
 .navbar-inverse .navbar-brand {
   color: white;
   padding-top:20px;
@@ -68,14 +72,20 @@ body {
   padding-top:20px;
   border-bottom: solid #8CE200;
   min-height: 60px;
+  color: white;
 }
 .navbar-inverse .navbar-nav > li > a {
   padding-top:20px;
   font-size: 16px;
+  color: white;
 }
 .navbar-inverse .navbar-text {
   padding-top:20px;
   margin: 0 15px 0 15px;
   font-weight: bold;
   font-size: 16px;
+  color: white;
+}
+.navbar {
+  margin-bottom:0;
 }
