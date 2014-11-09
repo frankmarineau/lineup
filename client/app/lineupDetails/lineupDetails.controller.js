@@ -2,7 +2,7 @@
 
 angular.module('lineupApp')
   .controller('LineupdetailsCtrl', function ($scope, Lineup, $routeParams, $http) {
-    $scope.lineup = Lineup.query($routeParams.id);
+    $scope.lineup = Lineup.get($routeParams._id);
 
     $scope.achalandageChart = {
       labels : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
