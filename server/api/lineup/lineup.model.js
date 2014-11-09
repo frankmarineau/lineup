@@ -30,7 +30,7 @@ LineupSchema.methods.userCount = function (cb) {
 LineupSchema.methods.averageWait = function (cb) {
   var today = new Date();
   today.setHours(0, 0, 0, 0);
-  this.model('Lineupuser').find({ lineup: this._id, timeJoined: { $gte: today }, timeLeft: { $exists: true } }, function (err, lineupusers) {
+  this.model('Lineupuser').find({ lineup: this._id, timeLeft: { $gte: today } }, function (err, lineupusers) {
     if (err) return cb(err);
     var n = 0;
     lineupusers.forEach(function (lineupuser) {
@@ -53,10 +53,10 @@ LineupSchema.methods.lineupStats = function (cb) {
       self.averageWait(callback);
     },
     function (callback) {
-      self.model('Lineupuser').count({ timeJoined: { $gte: today } }, callback);
+      self.model('Lineupuser').count({ lineup: self._id, timeJoined: { $gte: today } }, callback);
     },
     function (callback) {
-      self.model('Lineupuser').count({ timeJoined: { $gte: today }, noShow: true }, callback);
+      self.model('Lineupuser').count({ lineup: self._id, timeJoined: { $gte: today }, noShow: true }, callback);
     }
   ], function (err, results) {
     if (err) return cb(err);
