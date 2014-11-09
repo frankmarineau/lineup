@@ -84,12 +84,20 @@
   color: white;
 }
 .navbar-inverse .navbar-text {
-  padding-top:20px;
+  padding-top: 20px;
   margin: 0 15px 0 15px;
   font-weight: bold;
   font-size: 16px;
   color: white;
 }
+
+@media only screen and (max-device-width: 768px) {
+  .navbar .logo {
+    float: left;
+    margin-left: 20px;
+  }
+}
+
 .navbar {
   margin-bottom:0;
 }
