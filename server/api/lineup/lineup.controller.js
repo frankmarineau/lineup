@@ -56,9 +56,9 @@ exports.create = function (req, res) {
       return res.json(201, lineup);
     });
   } else if (req.user.hasRole('clerk')) {
-    return res.send(501, 'Not Implemented');
+    return res.send(403);
   } else {
-    return res.send(501, 'Not Implemented');
+    return res.send(403);
   }
 };
 
@@ -77,9 +77,9 @@ exports.update = function (req, res) {
       });
     });
   } else if (req.user.hasRole('clerk')) {
-    return res.send(501, 'Not Implemented');
+    return res.send(403);
   } else {
-    return res.send(501, 'Not Implemented');
+    return res.send(403);
   }
 };
 
@@ -94,9 +94,9 @@ exports.destroy = function (req, res) {
       });
     });
   } else if (req.user.hasRole('clerk')) {
-    return res.send(501, 'Not Implemented');
+    return res.send(403);
   } else {
-    return res.send(501, 'Not Implemented');
+    return res.send(403);
   }
 };
 
