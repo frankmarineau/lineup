@@ -18,6 +18,7 @@ angular.module('lineupApp')
     };
 
     $scope.checkout = function(index) {
+        console
         Lineup.checkout({
             id: $scope.lineup.users[index]._id
         }, function(newGuest) {
@@ -31,8 +32,6 @@ angular.module('lineupApp')
         }, function(newGuest) {
             $scope.lineup.users.splice(index, 1);
         });
-
-    	$scope.lineup.users.splice(index, 1);
     };
 
   });
