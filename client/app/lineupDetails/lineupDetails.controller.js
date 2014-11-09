@@ -43,9 +43,21 @@ angular.module('lineupApp')
     var max = 5;
     var min = 2;
     var noShowsMax = 1;
-    for (var i = 0; i < 24; ++i) {
+    var strt = 0;
+    var end = 15;
+    for (var i = 0; i < strt; ++i) {
+      dataShowUps.day.push(0);
+      dataNoShows.day.push(0);
+      labels.day.push(i);
+    }
+    for (var i = strt; i < end; ++i) {
       dataShowUps.day.push(Math.round(Math.random() * (max - min)) + min);
       dataNoShows.day.push(Math.round(Math.random() * noShowsMax));
+      labels.day.push(i);
+    }
+    for (var i = end; i < 24; ++i) {
+      dataShowUps.day.push(0);
+      dataNoShows.day.push(0);
       labels.day.push(i);
     }
 
@@ -53,8 +65,13 @@ angular.module('lineupApp')
     min = 14;
     noShowsMax = 7;
     for (var i = 0; i < 7; ++i) {
-      dataShowUps.week.push(Math.round(Math.random() * (max - min)) + min);
-      dataNoShows.week.push(Math.round(Math.random() * noShowsMax));
+      if (i == 5) {
+        dataShowUps.week.push(Math.round(Math.random() * (max - min)) + min);
+        dataNoShows.week.push(Math.round(Math.random() * noShowsMax));
+      } else {
+        dataShowUps.week.push(0);
+        dataNoShows.week.push(0);
+      }
     }
     labels.week = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
@@ -62,8 +79,14 @@ angular.module('lineupApp')
     min = 14;
     noShowsMax = 7;
     for (var i = 0; i < 30; ++i) {
-      dataShowUps.month.push(Math.round(Math.random() * (max - min)) + min);
-      dataNoShows.month.push(Math.round(Math.random() * noShowsMax));
+      if (i == 7) {
+        dataShowUps.month.push(Math.round(Math.random() * (max - min)) + min);
+        dataNoShows.month.push(Math.round(Math.random() * noShowsMax));
+      } else {
+        dataShowUps.month.push(0);
+        dataNoShows.month.push(0);
+      }
+
       labels.month.push(i + 1);
     }
 
