@@ -13,8 +13,10 @@ exports.index = function (req, res) {
       if (err) return handleError(res, err);
       async.map(lineups, function (lineup, callback) {
         lineup.lineupStats(function (err, stats) {
+          if (err) return handleError(res, err);
+          stats.wait = Math.round(stats.wait / 1000 / 60)
           lineup = lineup.toObject();
-          lineup.stats = stats.toObject();
+          lineup.stats = stats;
           callback(err, lineup);
         });
       }, function (err, lineups) {
@@ -27,9 +29,10 @@ exports.index = function (req, res) {
       if (err) return handleError(res, err);
       async.map(lineups, function (lineup, callback) {
         lineup.lineupStats(function (err, stats) {
+          if (err) return handleError(res, err);
+          stats.wait = Math.round(stats.wait / 1000 / 60)
           lineup = lineup.toObject();
-          lineup.stats = stats.toObject();
-          lineup.stats.wait = Math.round(lineup.stats.wait / 1000 / 60);
+          lineup.stats = stats;
           callback(err, lineup);
         });
       }, function (err, lineups) {
@@ -42,8 +45,10 @@ exports.index = function (req, res) {
       if (err) return handleError(res, err);
       async.map(lineupusers, function (lineupuser, callback) {
         lineupuser.userStats(function (err, stats) {
+          if (err) return handleError(res, err);
           lineupuser = lineupuser.toObject();
-          lineupuser.stats = stats.toObject();
+          stats.wait = Math.round(stats.wait / 1000 / 60)
+          lineupuser.stats = stats;
           callback(err, lineupuser);
         });
       }, function (err, lineupusers) {
@@ -64,10 +69,10 @@ exports.show = function (req, res) {
         if (err) return handleError(res, err);
         lineup.lineupStats(function (err, stats) {
           if (err) return handleError(res, err);
+          stats.wait = Math.round(stats.wait / 1000 / 60)
           lineup = lineup.toObject();
           lineup.users = lineupusers;
-          lineup.stats = stats.toObject();
-          lineup.stats.wait = Math.round(lineup.stats.wait / 1000 / 60);
+          lineup.stats = stats;
           return res.json(200, lineup);
         });
       });
@@ -76,10 +81,10 @@ exports.show = function (req, res) {
         if (err) return handleError(res, err);
         lineupuser.userStats(function (err, stats) {
           if (err) return handleError(res, err);
+          stats.wait = Math.round(stats.wait / 1000 / 60)
           lineupuser = lineupuser.toObject();
           lineupuser.lineup = lineup;
-          lineupuser.stats = stats.toObject();
-          lineup.stats.wait = Math.round(lineup.stats.wait / 1000 / 60);
+          lineupuser.stats = stats;
           return res.json(200, lineupuser);
         });
       });
