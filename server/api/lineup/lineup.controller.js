@@ -31,11 +31,13 @@ exports.show = function (req, res) {
     if (!lineup) return res.send(404);
 
     if (req.user.hasRole('clerk')) {
-      Lineupuser.find({ lineup: lineup._id }).populate('user').exec(function (err, lineupusers) {
+      Lineupuser.find({ lineup: lineup._id, timeLeave: null }).populate('user').exec(function (err, lineupusers) {
         if (err) return handleError(res, err);
-        lineup.clients = lineupusers;
+        console.log(lineupusers);
         lineup.averageWait(function (err, wait) {
           if (err) return handleError(res, err);
+          lineup = lineup.toObject();
+          lineup.users = lineupusers;
           lineup.wait = wait;
           return res.json(200, lineup);
         });
