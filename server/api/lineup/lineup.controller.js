@@ -14,8 +14,7 @@ exports.index = function (req, res) {
       async.map(lineups, function (lineup, callback) {
         lineup.lineupStats(function (err, stats) {
           lineup = lineup.toObject();
-          lineup.count = stats.count;
-          lineup.wait = Math.round(stats.wait / 1000 / 60);
+          lineup.stats = stats.toObject();
           callback(err, lineup);
         });
       }, function (err, lineups) {
@@ -29,8 +28,8 @@ exports.index = function (req, res) {
       async.map(lineups, function (lineup, callback) {
         lineup.lineupStats(function (err, stats) {
           lineup = lineup.toObject();
-          lineup.count = stats.count;
-          lineup.wait = Math.round(stats.wait / 1000 / 60);
+          lineup.stats = stats.toObject();
+          lineup.stats.wait = Math.round(lineup.stats.wait / 1000 / 60);
           callback(err, lineup);
         });
       }, function (err, lineups) {
@@ -44,8 +43,7 @@ exports.index = function (req, res) {
       async.map(lineupusers, function (lineupuser, callback) {
         lineupuser.userStats(function (err, stats) {
           lineupuser = lineupuser.toObject();
-          lineupuser.count = stats.count;
-          lineupuser.wait = Math.round(stats.count * stats.wait / 1000 / 60);
+          lineupuser.stats = stats.toObject();
           callback(err, lineupuser);
         });
       }, function (err, lineupusers) {
@@ -68,8 +66,8 @@ exports.show = function (req, res) {
           if (err) return handleError(res, err);
           lineup = lineup.toObject();
           lineup.users = lineupusers;
-          lineup.count = stats.count;
-          lineup.wait = Math.round(stats.count * stats.wait / 1000 / 60);
+          lineup.stats = stats.toObject();
+          lineup.stats.wait = Math.round(lineup.stats.wait / 1000 / 60);
           return res.json(200, lineup);
         });
       });
@@ -80,8 +78,8 @@ exports.show = function (req, res) {
           if (err) return handleError(res, err);
           lineupuser = lineupuser.toObject();
           lineupuser.lineup = lineup;
-          lineupuser.count = stats.count;
-          lineupuser.wait = Math.round(stats.count * stats.wait / 1000 / 60);
+          lineupuser.stats = stats.toObject();
+          lineup.stats.wait = Math.round(lineup.stats.wait / 1000 / 60);
           return res.json(200, lineupuser);
         });
       });

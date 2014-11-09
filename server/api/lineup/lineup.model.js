@@ -1,5 +1,7 @@
 'use strict';
 
+var async = require('async');
+
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
@@ -20,12 +22,16 @@ var LineupSchema = new Schema({
 });
 
 LineupSchema.methods.userCount = function (cb) {
-  this.model('Lineupuser').count({ lineup: this._id, timeLeft: null }, cb);
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+  this.model('Lineupuser').count({ lineup: this._id, timeJoined: { $gte: today }, timeLeft: null }, cb);
 };
 
 LineupSchema.methods.averageWait = function (cb) {
-  this.model('Lineupuser').find({ lineup: this._id, timeLeft: { $exists: true } }, function (err, lineupusers) {
-    if (err) return cb(err, lineupusers);
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+  this.model('Lineupuser').find({ lineup: this._id, timeJoined: { $gte: today }, timeLeft: { $exists: true } }, function (err, lineupusers) {
+    if (err) return cb(err);
     var n = 0;
     lineupusers.forEach(function (lineupuser) {
       n += lineupuser.timeLeft - lineupuser.timeJoined;
@@ -36,14 +42,29 @@ LineupSchema.methods.averageWait = function (cb) {
 
 LineupSchema.methods.lineupStats = function (cb) {
   var self = this;
-  var stats = { count: 0, wait: 0 }
-  self.userCount(function (err, count) {
-    if (err) return cb(err, stats);
-    stats.count = count;
-    self.averageWait(function (err, wait) {
-      if (err) return cb(err, stats);
-      stats.wait = wait;
-      return cb(err, stats);
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  async.parallel([
+    function (callback) {
+      self.userCount(callback);
+    },
+    function (callback) {
+      self.averageWait(callback);
+    },
+    function (callback) {
+      self.model('Lineupuser').count({ timeJoined: { $gte: today } }, callback);
+    },
+    function (callback) {
+      self.model('Lineupuser').count({ timeJoined: { $gte: today }, noShow: true }, callback);
+    }
+  ], function (err, results) {
+    if (err) return cb(err);
+    cb(null, {
+      count: results[0],
+      wait: results[1],
+      total: results[2],
+      noshow: results[3]
     });
   });
 };
