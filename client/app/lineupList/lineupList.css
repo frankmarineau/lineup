@@ -1,7 +1,49 @@
+body {
+    background-color: #F1F2F6;
+    overflow: auto;
+}
+
+.lineup-current-people {
+    margin-top: 5px;
+}
+
+.lineup-list-container, .lineup-list-container .list-group-item {
+    color: #444E5E;
+}
+
+.lineup-list-container h1 {
+    height: 65px;
+    padding-top: 15px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.lineup-list-container .lineup-element {
+    margin-bottom: 25px;
+    box-shadow: 0px 1px 0px #EEE;
+    border-radius: 5px;
+    border: 0;
+    padding: 25px;
+}
+.lineup-list-container .lineup-element:hover {
+    background-color: #FCFCFC;
+}
+
 .stat-container {
-    text-align: center;
+    text-align: center;    
 }
 
 .stat-container h2 {
+    font-size: 20px;
     margin-bottom: 0;
+    font-weight: bold;
+}
+
+.stat-container small {
+    font-size: 13px;
+    color: #949FAE;
+}
+
+.stat-container .danger {
+    color: #EE4C41;
 }
