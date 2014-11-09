@@ -1,31 +1,18 @@
 'use strict';
 
 angular.module('lineupApp')
-  .controller('CheckinCtrl', function ($scope) {
+  .controller('CheckinCtrl', function ($scope, Checkin) {
+    
     $scope.message = 'Hello';    
 
-    $scope.GetLineupName = function(){
+    var refreshGuestList = function(){
+    	$scope.checkin = Checkin.query();
+    }
 
-    	// ajax call ??
-    	return 'Emergency'
+    refreshGuestList();
+
+    $scope.DeleteGuest = function(index){
+    	$scope.checkin.guests.splice(index, 1);
     };
 
-    $scope.lineupName = $scope.GetLineupName();
-
-    var Guest = function( firstName, lastName, numberOfAttendees, phoneNumer){
-    	return {
-    		firstName: firstName,
-    		lastName: lastName,
-    		numberOfAttendees: numberOfAttendees,
-    		phoneNumer: phoneNumer,
-    		fullName : function(){
-    			return firstName + ' ' + lastName;
-    		}
-    	};
-    };
-
-    $scope.guests = [
-    	Guest('Marc-Antoine', 'Babin', 4, '819-238-1313'),
-		Guest('Olivier', 'Charbonneau', 2, '819-238-1313'),
-    	];
   });
