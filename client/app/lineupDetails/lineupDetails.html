@@ -20,7 +20,7 @@
           </h4>
         </div>
 
-        <h4 class="analytics-chart-legend"># of users who <span style="color: #85D600;">were served</span> - <span style="color: #EE4C41;">never showed up</span></h4>
+        <h4 class="analytics-chart-legend"># of users who <span style="color: #85D600;">were served</span> vs. <span style="color: #EE4C41;">never showed up</span></h4>
 
         <div class="row">
           <div class="col-md-12">
@@ -30,10 +30,9 @@
       </div>
     </div>
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Settings</h3>
-      </div>
+    <div class="panel panel-default analytics-container settings-container">
+      <h3>Settings</h3>
+      <hr>
       <div class="panel-body">
         <form role="form" ng-submit="updateSettings()">
           <div class="row">
@@ -53,14 +52,14 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="openingHour">Opening hour</label>
-                <timepicker ng-model="openingHour" ng-change="openingHourChanged()" hour-step="1" minute-step="5" show-meridian="1"></timepicker>
+                <label for="openingHour">Opening Hours</label>
+                <timepicker class="timepicker" ng-model="openingHour" ng-change="openingHourChanged()" hour-step="1" minute-step="5" show-meridian="1"></timepicker>
               </div>
             </div>
-            <div class="column-md-6">
+            <div class="col-md-6">
               <div class="form-group">
-                <label for="closingHour">Closing hour</label>
-                <timepicker ng-model="closingHour" ng-change="closingHourChanged()" hour-step="1" minute-step="5" show-meridian="1"></timepicker>
+                <label for="closingHour">Closing Hours</label>
+                <timepicker class="timepicker" ng-model="closingHour" ng-change="closingHourChanged()" hour-step="1" minute-step="5" show-meridian="1"></timepicker>
               </div>
             </div>
           </div>
@@ -68,7 +67,7 @@
             <label for="welcomeMessage">Welcome message</label>
             <input type="text" class="form-control" id="welcomeMessage" ng-model="welcomeMessage">
           </div>
-          <button type="submit" class="btn btn-default">Save</button>
+          <button id="save-button" type="submit" class="btn btn-default">Save</button>
         </form>
       </div>
     </div>

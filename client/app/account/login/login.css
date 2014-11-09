@@ -21,3 +21,11 @@
   background-color: #fafafa;
   border-color: #ccc;
 }
+@media only screen and (max-device-width: 1200px) {
+  .connect-with > div {
+    margin-bottom:10px;
+  }
+  .connect-with a {
+    width: 100%;
+  }
+}
