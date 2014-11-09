@@ -42,3 +42,10 @@ h2 {
     text-align: center;
   }
 }
+
+#no-users-msg {
+  font-size: 24px;
+  text-align: center;
+  color: #949FAE;
+  margin-top: 45px;
+}

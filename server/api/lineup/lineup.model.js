@@ -23,10 +23,6 @@ LineupSchema.methods.userCount = function (cb) {
   this.model('Lineupuser').count({ lineup: this._id, timeLeft: null }, cb);
 };
 
-LineupSchema.methods.noshowCount = function (cb) {
-  this.model('Lineupuser').count({ lineup: this._id, noShow: true }, cb);
-}
-
 LineupSchema.methods.averageWait = function (cb) {
   this.model('Lineupuser').find({ lineup: this._id, timeLeft: { $exists: true } }, function (err, lineupusers) {
     if (err) return cb(err, lineupusers);
@@ -40,18 +36,14 @@ LineupSchema.methods.averageWait = function (cb) {
 
 LineupSchema.methods.lineupStats = function (cb) {
   var self = this;
-  var stats = { count: 0, noshow: 0, wait: 0 }
+  var stats = { count: 0, wait: 0 }
   self.userCount(function (err, count) {
     if (err) return cb(err, stats);
     stats.count = count;
-    self.noshowCount(function (err, noshow) {
+    self.averageWait(function (err, wait) {
       if (err) return cb(err, stats);
-      stats.noshow = noshow;
-      self.averageWait(function (err, wait) {
-        if (err) return cb(err, stats);
-        stats.wait = wait;
-        return cb(err, stats);
-      });
+      stats.wait = wait;
+      return cb(err, stats);
     });
   });
 };

@@ -7,6 +7,7 @@ var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
 var compose = require('composable-middleware');
 var User = require('../api/user/user.model');
+var Lineupuser = require('../api/lineupuser/lineupuser.model');
 var validateJwt = expressJwt({ secret: config.secrets.session });
 
 /**
@@ -71,7 +72,19 @@ function setTokenCookie(req, res) {
   if (!req.user) return res.json(404, { message: 'Something went wrong, please try again.'});
   var token = signToken(req.user._id, req.user.role);
   res.cookie('token', JSON.stringify(token));
-  res.redirect('/');
+
+  if (req.query.state) {
+    Lineupuser.findById(req.query.state, function (err, lineupuser) {
+      if (!err && lineupuser) {
+        lineupuser.user = req.user._id;
+        lineupuser.save(function (err) {
+          res.redirect('/');
+        });
+      }
+    });
+  } else {
+    res.redirect('/');
+  }
 }
 
 exports.isAuthenticated = isAuthenticated;
