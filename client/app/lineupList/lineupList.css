@@ -47,3 +47,11 @@ body {
 .stat-container .danger {
     color: #EE4C41;
 }
+
+.analytics-chart-legend {
+    float: right;
+}
+
+.analytics-date-range {
+    float: left;
+}

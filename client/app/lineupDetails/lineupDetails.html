@@ -3,22 +3,28 @@
 <div class="container">
   <div class="col-md-12">
     <h1 class="page-header">Lineup #1</h1>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Analytics</h3>
-      </div>
+    <div class="panel panel-default analytics-container">
+      <h3>Analytics</h3>
+      <hr>
       <div class="panel-body" id="analytics-section">
-        <h4 id="analytics-timerange">November 3 - 9</h4>
-        <div class="btn-group" id="analytics-timescale">
-          <button type="button" class="btn btn-default">Day</button>
-          <button type="button" class="btn btn-default">Week</button>
-          <button type="button" class="btn btn-default">Month</button>
+        <div class="analytics-date-range">
+          <div class="btn-group" id="analytics-timescale">
+            <button type="button" class="btn btn-default" ng-model="dateRange" btn-radio="'day'">Day</button>
+            <button type="button" class="btn btn-default" ng-model="dateRange" btn-radio="'week'">Week</button>
+            <button type="button" class="btn btn-default" ng-model="dateRange" btn-radio="'month'">Month</button>
+          </div>
+          <h4 id="analytics-timerange" ng-switch="dateRange">
+            <span ng-switch-when="day">November 9</span>
+            <span ng-switch-when="week">November 3 - 9</span>
+            <span ng-switch-when="month">November</span>
+          </h4>
         </div>
+
+        <h4 class="analytics-chart-legend"># of users who <span style="color: #85D600;">were served</span> - <span style="color: #EE4C41;">never showed up</span></h4>
 
         <div class="row">
           <div class="col-md-12">
-            <h4># of users who <span style="color: #0f9ff1;">were served</span> - <span style="color: #e67e22;">never showed up</span></h4>
-            <canvas chart="Line" options="chartOptions" data="achalandageChart" width="1080" height="400"></canvas>
+            <canvas chart="Line" options="chartOptions" data="achalandageChart" width="1030" height="400"></canvas>
           </div>
         </div>
       </div>
